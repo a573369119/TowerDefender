@@ -1,0 +1,4 @@
+<page>
+   <item name="Welcome/Login.scene" props="" ifExport="分离模式" aName=""/>
+   <item name="Dialog_/FloatMsg.scene" props="" ifExport="分离模式" aName=""/>
+</page>

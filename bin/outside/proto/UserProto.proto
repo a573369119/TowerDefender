@@ -1,0 +1,33 @@
+// ���ʹ�ô�ע�ͣ���ʹ��proto3; ����ʹ��proto2
+syntax = "proto3";
+//option java_package="com.game.user.proto";
+option java_outer_classname="UserProto";
+//option java_multiple_files = true; ��������Ϊtrue��������ÿ���������һ���ļ��У��������ж�����һ��java�ļ���
+
+
+//----------------------bean
+message UserData{
+        int32 lv = 1;
+        string nickName = 2;
+}
+//请求
+//----------------------101103-------------------------  101203
+message ReqUserLogin{
+        string userName = 1;
+        string userKey = 2;
+}
+
+//----------------------101104------------------------- 返回101203
+message ReqUserRegister{
+       string userName = 1;
+       string userKey = 2;
+       UserData userData = 3;
+}
+
+
+//响应
+//----------------------101203------------------------
+message ResUserLogin{
+	string userName = 1;
+	UserData userData = 2;
+}
