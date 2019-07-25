@@ -33,13 +33,43 @@ P B9680947 vscroll$up.png
 P 7E990267 vscroll.png
 P E466EB1C vslider$bar.png
 P 2BFF7046 vslider.png
-D public
+D game
+P 58F6C632 door.png
+P DAA10415 grass1.png
+P AAE3A685 grass2.png
+P 8D5B1099 mud.png
+P 8DC1620F road.png
+P D40CB089 shovel_off.png
+P 41AF36DC shovel_on.png
+P FFEC09D8 wall.png
+R 3C9227DC wood.png
+D gameLobby
+P 54FBC724 back.png
+P 12F5D4EF MenuItem.png
+P 6F851E79 player_icon.png
+P FA988F83 player_icon_bg.png
 D unpackage
 D welcome
 P D7518C64 light.png
 R 47EE59FF loginbox.png
 R 41CCD3AD progressBg.png
 P 5DB194CD progressLight.png
+D game/ani
+P 9292D904 monster_down1.png
+P 37590528 monster_down2.png
+P 00BBA6C8 monster_down3.png
+P 15AD8FB9 monster_left1.png
+P 6E92A427 monster_left2.png
+P 10877264 monster_left3.png
+P 073F07C1 monster_right1.png
+P BD5142E7 monster_right2.png
+P C5C82E46 monster_right3.png
+P 7F3260AD monster_up1.png
+P 4857DDA9 monster_up2.png
+P FAFD9A44 monster_up3.png
+D unpackage/gameLobby
+R F0C1A1F4 gameLobbyBg.png
+R 4516FF0C loadingbg.png
 D unpackage/welcome
 R A6207A31 boximg.png
 R C898EA98 welcome_bg.png

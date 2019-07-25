@@ -99,7 +99,8 @@ export default class WelComeController extends ui.Welcome.LoginUI{
     /**点击登陆 */
     private onLogin() : void
     {
-        ClientSender.reqUserLogin(this.input_userName.text,this.input_userKey.text);
+        //ClientSender.reqUserLogin(this.input_userName.text,this.input_userKey.text);
+        Laya.Scene.open("GameLobby/GameLobby.scene");
     }
 
     /**点击注册 */
