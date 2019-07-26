@@ -1,0 +1,8 @@
+[
+    {"monsterId":1,"monsterName":"怪物1","type":1,"power":10,"def":10,"speed":1},
+    {"monsterId":2,"monsterName":"怪物2","type":2,"power":10,"def":10,"speed":1},
+    {"monsterId":3,"monsterName":"怪物3","type":3,"power":10,"def":10,"speed":1},
+    {"monsterId":4,"monsterName":"怪物4","type":4,"power":10,"def":10,"speed":1},
+    {"monsterId":5,"monsterName":"怪物5","type":5,"power":10,"def":10,"speed":1}
+]
+

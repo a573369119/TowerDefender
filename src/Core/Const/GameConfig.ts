@@ -11,6 +11,22 @@ export class GameConfig{
     // /**端口 - 本地测试*/
     public static PORT : number = 7777;
 
+    //--------------------配置类型------------
+    public static CONFIG_NAME_MONSTER : string = "monster";
+    public static CONFIG_NAME_DEFENDER : string = "defender";
+    
+    //-------------------属性 类型-----------   
+    /**金 1 */
+    public static TYPE_GOLD : number = 1 ;
+    /**木 2 */
+    public static TYPE_WOOD : number = 2;
+    /**水 3*/
+    public static TYPE_WATER : number = 3;
+    /**火 */
+    public static TYPE_FIRE : number = 4;
+    /**土*/
+    public static TYPE_GROUND : number = 5; 
+
     constructor(){
 
     }
@@ -67,6 +83,14 @@ export class Protocol{
 
 
 
+    /**请求匹配对局102101 */
+    public static REQ_MATCH:number=102101;
+    /**请求 对局接受102102 */
+    public static REQ_MATCH_ACCEPT:number=102102;
+    /**响应 返回匹配信息 只发送一次msgId = 102201 */
+    public static RES_MATCH_INFO : number = 102201;
+    /**响应 返回对局接受消息msgId = 10202 */
+    public static RES_MATCH_ACCEPT_INFO : number = 10202;
     // //************playerMessage.proto
     // //请求
     // /**请求扭蛋 msgId=102101 */

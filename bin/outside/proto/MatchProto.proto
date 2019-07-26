@@ -1,0 +1,43 @@
+syntax = "proto3";
+//option java_package="com.game.user.proto";
+option java_outer_classname="MatchProto";
+//option java_multiple_files = true; 
+
+//------------------------匹配消息文件协议前缀102
+
+//----------------------bean
+message matchInfo{//匹配信息
+				fixed64 userId = 1;//用户唯一id
+				int32 lv = 2;//用户等级
+				string userNickName = 3;//用户昵称
+				string userName = 4;//用户名
+				int32 type = 5;//1右方 2敌方
+}
+
+//-------------REQ请求
+
+//----------------------102101-------------------------请求匹配对局  返回102201
+message ReqMatch{
+				fixed64 userId = 1;//请求匹配的用户唯一id
+				int32 matchId = 2;//请求匹配 那种模式： 1是1V1  现在就默认为1 
+}
+
+//----------------------102102-------------------------请求 对局接受  返回102202
+message ReqMatchAccept{
+				fixed64 userId = 1;//用户唯一Id
+				int32 isAccepte = 2;//0代表(服务器用) 无状态 1代表 接受 2代表 拒绝 3代表确认（服务器用）
+}
+
+//-------------RES返回
+
+//----------------------102201------------------------返回匹配信息 只发送一次
+message ResMatchInfo{
+				int32 status = 1;//匹配状态 1是匹配成功,等待确认 2是匹配失败 请稍候重试
+				repeated matchInfo matchInfoList = 2;//匹配玩家信息 repeated代表数组
+}
+
+//-----------------------10202------------------------返回对局接受消息
+message ResMatchAccepteInfo{
+				repeated fixed64 userIdList = 1;//还需等待那些用户接受的id列表，若userIdList没用用户id则，全部接受，进入游戏界面
+				int32 status = 2;// 1匹配继续  2对局结束-等待结束（有人拒绝）
+}

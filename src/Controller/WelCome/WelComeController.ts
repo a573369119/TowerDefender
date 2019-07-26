@@ -5,6 +5,7 @@ import UserLoginHandler from "./handler/UserLoginHandler";
 import ClientSender from "../../Core/Net/ClientSender";
 import Tool from "../../Tool/Tool";
 import MessageManager from "../../Core/MessageManager";
+import ConfigManager from "../../Core/ConfigManager";
 
 export default class WelComeController extends ui.Welcome.LoginUI{
     /**是否连接上服务器 */
@@ -61,10 +62,12 @@ export default class WelComeController extends ui.Welcome.LoginUI{
     private loadAssets() : void
     {
         let src = [
-            {url:"unpackage/welcome/boximg.png"}
+            {url:"unpackage/welcome/boximg.png"},
+            //json
+            {url:"outside/config/gameConfig/defender.json"},
+            {url:"outside/config/gameConfig/monster.json"}  
         ];
         Laya.loader.load(src,Laya.Handler.create(this,this.onLoad),Laya.Handler.create(this,this.onProcess));
-        this.onLoad();
     }
 
     /**加载进程 */
@@ -85,6 +88,8 @@ export default class WelComeController extends ui.Welcome.LoginUI{
         this.sp_progressT.text = "加载完毕进入游戏";
         Laya.timer.once(800,this,this.showLoginBox);
         MessageManager.ins.newFloatMsg();
+        //获取配置
+        ConfigManager.ins.loadConfig();
     }
 
     /**显示登录框**/
@@ -99,7 +104,8 @@ export default class WelComeController extends ui.Welcome.LoginUI{
     /**点击登陆 */
     private onLogin() : void
     {
-        ClientSender.reqUserLogin(this.input_userName.text,this.input_userKey.text);
+        //ClientSender.reqUserLogin(this.input_userName.text,this.input_userKey.text);
+        Laya.Scene.open("GameLobby/GameLobby.scene");
     }
 
     /**点击注册 */
@@ -129,7 +135,7 @@ export default class WelComeController extends ui.Welcome.LoginUI{
             let text = "登陆成功，进入游戏！"
             if(this.sp_registerBox.visible) text = "注册成功，将直接进入游戏！";
             MessageManager.ins.showFloatMsg(text);
-            Laya.timer.once(800,this,this.toGameMain);
+            Laya.timer.once(100,this,this.toGameMain);
         }
     }
 
@@ -143,5 +149,6 @@ export default class WelComeController extends ui.Welcome.LoginUI{
     private toGameMain() : void
     {
         //TO DO 跳转至游戏大厅
+        Laya.Scene.open("GameLobby/GameLobby.scene");
     }
 }
