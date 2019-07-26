@@ -35,6 +35,8 @@ export default class FloatMsg extends ui.Dialog_.FloatMsgUI{
      */
     public showMsg(text:string,pos:any) : void
     {
+        this.visible = true; 
+        this.alpha = 1;       
         this.sp_floatMsg.visible = true;
         this.lab_floatMsg.text = text;
         this.x = pos.x;
@@ -46,6 +48,7 @@ export default class FloatMsg extends ui.Dialog_.FloatMsgUI{
     {
         this.ani1.stop();
         this.sp_floatMsg.visible = false;
+        this.visible = false;
         Laya.Pool.recover("FloatMsg",this);
         MessageManager.ins.countFloatMsg--;
     }

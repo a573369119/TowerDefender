@@ -3,13 +3,13 @@
 */
 export class GameConfig{
     /**ip*/
-    public static IP : string = "47.107.169.244";
+    // public static IP : string = "47.107.169.244";
     /**端口 */
-    public static PORT : number = 7777  ;
+    // public static PORT : number = 7777  ;
     // /**ip - 本地测试*/
-    // public static IP : string = "127.0.0.1";
+    public static IP : string = "127.0.0.1";
     // /**端口 - 本地测试*/
-    // public static PORT : number = 7777;
+    public static PORT : number = 7777;
 
     constructor(){
 
@@ -18,6 +18,20 @@ export class GameConfig{
 
 /**协议 */
 export class Protocol{
+     //****************UserProto.proto
+    /**请求 msgId = 101103 */
+    public static REQ_USER_LOGIN : number = 101103;
+    /**101104 注册请求 */
+    public static REQ_USER_REGISTER : number = 101104;
+
+    /**响应 msgId = 101203 */
+    public static RES_USER_LOGIN : number = 101203;
+
+    
+
+
+
+
     // //************gmMessage.proto
     // /**发送GM密令 */
     // public static REQ_GM_COM:number = 199101;
@@ -51,13 +65,7 @@ export class Protocol{
     // /**返回被顶下线 */
     // public static RESP_SUBSTITUTE:number = 101203;
 
-    //****************UserProto.proto
-    /**请求 msgId = 101103 */
-    public static REQ_USER_LOGIN : number = 101103;
-    /**101104 注册请求 */
-    public static REQ_USER_REGISTER : number = 101104;
-    /**响应 msgId = 101203 */
-    public static RES_USER_LOGIN : number = 101203;
+
 
     // //************playerMessage.proto
     // //请求
