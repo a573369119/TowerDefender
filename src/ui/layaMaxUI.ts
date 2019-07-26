@@ -28,10 +28,8 @@ export module ui.Game {
 		public Groups:Laya.Sprite;
 		public red_group:Laya.Sprite;
 		public red_door:Laya.Sprite;
-		public red_Grass:Laya.Sprite;
 		public blue_group:Laya.Sprite;
 		public blue_door:Laya.Sprite;
-		public blue_Grass:Laya.Sprite;
 		public road:Laya.Sprite;
 		public MenuItem:Laya.Sprite;
 		public shovel_off:Laya.Sprite;
@@ -111,10 +109,10 @@ export module ui {
 		public blue_player_5:Laya.Sprite;
 		public name_blue_player_5:laya.display.Text;
 		public icon_blue_player_5:Laya.Sprite;
-		public loadingBarBg:Laya.Sprite;
-		public sprite_progress:Laya.Sprite;
-		public sprite_light:Laya.Sprite;
-		public text_progress:Laya.Label;
+		public sp_progress:Laya.Sprite;
+		public sp_progressW:Laya.Sprite;
+		public sp_progressL:Laya.Sprite;
+		public sp_progressT:Laya.Label;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

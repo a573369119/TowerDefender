@@ -45,6 +45,36 @@ export default class ClientSender{
         var buffer = ReqUserRegister.encode(message).finish();
         WebSocketManager.ins.sendMsg(Protocol.REQ_USER_REGISTER,buffer);
     }
+
+    /**
+     * 请求匹配对局 102101
+     * @param userId 
+    * @param matchId 
+    */
+   public static reqMatch(userId:number,matchId:number):void
+   {
+       var ReqMatch:any = WebSocketManager.ins.defineProtoClass("ReqMatch");
+       var message:any = {};
+       message.userId = userId;
+       message.matchId = matchId;
+       var buffer = ReqMatch.encode(message).finish();
+       WebSocketManager.ins.sendMsg(Protocol.REQ_MATCH,buffer);
+   }
+
+   /**
+     * 请求 对局接受 返回102202
+     * @param userId 
+    * @param isAccepte 
+    */
+   public static reqMatchAccept(userId:number,isAccepte:number):void
+   {
+       var ReqMatchAccept:any = WebSocketManager.ins.defineProtoClass("ReqMatchAccept");
+       var message:any = {};
+       message.userId = userId;
+       message.isAccepte = isAccepte;
+       var buffer = ReqMatchAccept.encode(message).finish();
+       WebSocketManager.ins.sendMsg(Protocol.REQ_MATCH_ACCEPT,buffer);
+   }
     
     /***消息发送*/
 

@@ -59,6 +59,14 @@ export class Protocol{
     /**响应 msgId = 101203 */
     public static RES_USER_LOGIN : number = 101203;
 
+    /**请求匹配对局102101 */
+    public static REQ_MATCH:number=102101;
+    /**请求 对局接受102102 */
+    public static REQ_MATCH_ACCEPT:number=102102;
+    /**响应 返回匹配信息 只发送一次msgId = 102201 */
+    public static RES_MATCH_INFO : number = 102201;
+    /**响应 返回对局接受消息msgId = 10202 */
+    public static RES_MATCH_ACCEPT_INFO : number = 10202;
     // //************playerMessage.proto
     // //请求
     // /**请求扭蛋 msgId=102101 */

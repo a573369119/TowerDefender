@@ -130,7 +130,7 @@ export default class WelComeController extends ui.Welcome.LoginUI{
             let text = "登陆成功，进入游戏！"
             if(this.sp_registerBox.visible) text = "注册成功，将直接进入游戏！";
             MessageManager.ins.showFloatMsg(text);
-            Laya.timer.once(800,this,this.toGameMain);
+            Laya.timer.once(100,this,this.toGameMain);
         }
     }
 
@@ -144,5 +144,6 @@ export default class WelComeController extends ui.Welcome.LoginUI{
     private toGameMain() : void
     {
         //TO DO 跳转至游戏大厅
+        Laya.Scene.open("GameLobby/GameLobby.scene");
     }
 }

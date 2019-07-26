@@ -1,4 +1,8 @@
 import { ui } from "../../ui/layaMaxUI";
+import WebSocketManager from "../../Core/Net/WebSocketManager";
+import { Protocol, GameConfig } from "../../Core/Const/GameConfig";
+import MatchHandler from "../GameLobby/handler/MatchHandler";
+import ClientSender from "../../Core/Net/ClientSender";
 export default class GameLobbyController extends ui.GameLobby.GameLobbyUI{
     constructor(){
         super();
@@ -21,12 +25,14 @@ export default class GameLobbyController extends ui.GameLobby.GameLobbyUI{
         this.btn_1V1.on(Laya.Event.CLICK,this,this.on1V1);
         this.btn_5V5.on(Laya.Event.CLICK,this,this.on5V5);
         this.btn_back.on(Laya.Event.CLICK,this,this.onBack);
-        this.btn_entergame.on(Laya.Event.CLICK,this,this.onEnterGame);
+        this.btn_entergame.on(Laya.Event.CLICK,this,this.onEnterLoading);
+        WebSocketManager.ins.registerHandler(Protocol.RES_MATCH_INFO,new MatchHandler(this,this.onMatchHandler));
     }
 
     private removeEvents() : void
     {
         this.btn_PVP.off(Laya.Event.CLICK,this,this.onPVPMode);
+        WebSocketManager.ins.unregisterHandler(Protocol.RES_MATCH_INFO,this);
     }
 
 
@@ -37,11 +43,21 @@ export default class GameLobbyController extends ui.GameLobby.GameLobbyUI{
         this.ModeChoosePanel.visible=true;
     }
 
+    /**获取到消息 */
+    private onMatchHandler(data) : void
+    {
+        console.log(data+"匹配成功");
+        if(data !== undefined)
+        {
+            Laya.timer.once(100,this,this.chooseMatch);
+        }
+    }
+
     /**点击选择1V1模式 */
     private on1V1() : void
     {
-        this.MatchingSuccessPanel.visible=true;
-        this.ModeChoosePanel.visible=false;
+       // ClientSender.reqMatch(1,1);
+       this.chooseMatch();
     }
 
     /**点击选择5V5模式 */
@@ -57,9 +73,18 @@ export default class GameLobbyController extends ui.GameLobby.GameLobbyUI{
         this.ModeChoosePanel.visible=false;
     }
 
-    /**进入游戏 */
-    private onEnterGame():void
+    /**匹配成功弹框，选择是否进入游戏 */
+    private chooseMatch():void
     {
-        Laya.Scene.open("Game/Game.scene");
+        this.MatchingSuccessPanel.visible=true;
+        this.ModeChoosePanel.visible=false;
     }
+
+    /**进入游戏 */
+    private onEnterLoading():void
+    {
+        Laya.Scene.open("PlayerLoading.scene");
+    }
+
+     
 }
