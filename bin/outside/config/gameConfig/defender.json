@@ -1,0 +1,8 @@
+[
+    {"defenderId":1,"defenderName":"防御塔1","type":1,"power":10,"dic":10,"attackSpeed":1},
+    {"defenderId":2,"defenderName":"防御塔2","type":2,"power":10,"dic":10,"attackSpeed":1},
+    {"defenderId":3,"defenderName":"防御塔3","type":3,"power":10,"dic":10,"attackSpeed":1},
+    {"defenderId":4,"defenderName":"防御塔4","type":4,"power":10,"dic":10,"attackSpeed":1},
+    {"defenderId":5,"defenderName":"防御塔5","type":5,"power":10,"dic":10,"attackSpeed":1}
+]
+

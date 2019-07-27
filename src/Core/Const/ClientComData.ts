@@ -6,11 +6,4 @@ class ClientComData{
     {
 
     }
-
-    /**解析配置 */
-    public static parseConfig():void
-    {
-
-    
-    }
 }

@@ -5,6 +5,7 @@ import UserLoginHandler from "./handler/UserLoginHandler";
 import ClientSender from "../../Core/Net/ClientSender";
 import Tool from "../../Tool/Tool";
 import MessageManager from "../../Core/MessageManager";
+import ConfigManager from "../../Core/ConfigManager";
 
 export default class WelComeController extends ui.Welcome.LoginUI{
     /**是否连接上服务器 */
@@ -61,10 +62,12 @@ export default class WelComeController extends ui.Welcome.LoginUI{
     private loadAssets() : void
     {
         let src = [
-            {url:"unpackage/welcome/boximg.png"}
+            {url:"unpackage/welcome/boximg.png"},
+            //json
+            {url:"outside/config/gameConfig/defender.json"},
+            {url:"outside/config/gameConfig/monster.json"}  
         ];
         Laya.loader.load(src,Laya.Handler.create(this,this.onLoad),Laya.Handler.create(this,this.onProcess));
-        this.onLoad();
     }
 
     /**加载进程 */
@@ -85,6 +88,8 @@ export default class WelComeController extends ui.Welcome.LoginUI{
         this.sp_progressT.text = "加载完毕进入游戏";
         Laya.timer.once(800,this,this.showLoginBox);
         MessageManager.ins.newFloatMsg();
+        //获取配置
+        ConfigManager.ins.loadConfig();
     }
 
     /**显示登录框**/

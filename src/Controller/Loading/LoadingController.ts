@@ -1,4 +1,5 @@
 import { ui } from "../../ui/layaMaxUI";
+import ConfigManager from "../../Core/ConfigManager";
 export default class LoadingController extends ui.PlayerLoadingUI{
     /**是否连接上服务器 */
     private isConnectServer : boolean;
@@ -15,7 +16,8 @@ export default class LoadingController extends ui.PlayerLoadingUI{
     private loadAssets() : void
     {
         let src = [
-            {url:"res/atlas/game.atlas"}
+            //图集加载
+            {url:"res/atlas/game.atlas"},      
         ];
         Laya.loader.load(src,Laya.Handler.create(this,this.onLoad),Laya.Handler.create(this,this.onProcess));
         this.onLoad();

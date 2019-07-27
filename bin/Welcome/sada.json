@@ -1,0 +1,1 @@
+{"type":"Scene","props":{"width":1440,"runtime":"aaa.ts","height":900},"compId":2,"child":[{"type":"Sprite","props":{"y":357,"x":609,"texture":"welcome/light.png"},"compId":3}],"loadList":["welcome/light.png"],"loadList3D":[]}

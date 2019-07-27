@@ -348,7 +348,8 @@ var LoadingController = /** @class */ (function (_super) {
     /**加载游戏场景资源 */
     LoadingController.prototype.loadAssets = function () {
         var src = [
-            { url: "res/atlas/game.atlas" }
+            //图集加载
+            { url: "res/atlas/game.atlas" },
         ];
         Laya.loader.load(src, Laya.Handler.create(this, this.onLoad), Laya.Handler.create(this, this.onProcess));
         this.onLoad();
@@ -376,7 +377,7 @@ var LoadingController = /** @class */ (function (_super) {
     return LoadingController;
 }(layaMaxUI_1.ui.PlayerLoadingUI));
 exports.default = LoadingController;
-},{"../../ui/layaMaxUI":22}],7:[function(require,module,exports){
+},{"../../ui/layaMaxUI":26}],7:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var layaMaxUI_1 = require("../../ui/layaMaxUI");
@@ -386,6 +387,7 @@ var UserLoginHandler_1 = require("./handler/UserLoginHandler");
 var ClientSender_1 = require("../../Core/Net/ClientSender");
 var Tool_1 = require("../../Tool/Tool");
 var MessageManager_1 = require("../../Core/MessageManager");
+var ConfigManager_1 = require("../../Core/ConfigManager");
 var WelComeController = /** @class */ (function (_super) {
     __extends(WelComeController, _super);
     function WelComeController() {
@@ -429,10 +431,12 @@ var WelComeController = /** @class */ (function (_super) {
     };
     WelComeController.prototype.loadAssets = function () {
         var src = [
-            { url: "unpackage/welcome/boximg.png" }
+            { url: "unpackage/welcome/boximg.png" },
+            //json
+            { url: "outside/config/gameConfig/defender.json" },
+            { url: "outside/config/gameConfig/monster.json" }
         ];
         Laya.loader.load(src, Laya.Handler.create(this, this.onLoad), Laya.Handler.create(this, this.onProcess));
-        this.onLoad();
     };
     /**加载进程 */
     WelComeController.prototype.onProcess = function (pro) {
@@ -451,6 +455,10 @@ var WelComeController = /** @class */ (function (_super) {
         this.sp_progressT.text = "加载完毕进入游戏";
         Laya.timer.once(800, this, this.showLoginBox);
         MessageManager_1.default.ins.newFloatMsg();
+        //获取配置
+        ConfigManager_1.default.ins.loadConfig();
+        //测试
+        console.log(ConfigManager_1.default.ins.getConfigById("monster", 1));
     };
     /**显示登录框**/
     WelComeController.prototype.showLoginBox = function () {
@@ -499,7 +507,7 @@ var WelComeController = /** @class */ (function (_super) {
     return WelComeController;
 }(layaMaxUI_1.ui.Welcome.LoginUI));
 exports.default = WelComeController;
-},{"../../Core/Const/GameConfig":9,"../../Core/MessageManager":10,"../../Core/Net/ClientSender":11,"../../Core/Net/WebSocketManager":15,"../../Tool/Tool":21,"../../ui/layaMaxUI":22,"./handler/UserLoginHandler":8}],8:[function(require,module,exports){
+},{"../../Core/ConfigManager":9,"../../Core/Const/GameConfig":10,"../../Core/MessageManager":11,"../../Core/Net/ClientSender":12,"../../Core/Net/WebSocketManager":16,"../../Tool/Tool":25,"../../ui/layaMaxUI":26,"./handler/UserLoginHandler":8}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var SocketHandler_1 = require("../../../Core/Net/SocketHandler");
@@ -525,22 +533,87 @@ var UserLoginHandler = /** @class */ (function (_super) {
     return UserLoginHandler;
 }(SocketHandler_1.default));
 exports.default = UserLoginHandler;
-},{"../../../Core/Net/SocketHandler":14,"../../../Core/Net/WebSocketManager":15}],9:[function(require,module,exports){
+},{"../../../Core/Net/SocketHandler":15,"../../../Core/Net/WebSocketManager":16}],9:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var DefenderConfig_1 = require("../Data/Config/DefenderConfig");
+var MosnterConfigr_1 = require("../Data/Config/MosnterConfigr");
+/**
+ * 配置加载器
+ */
+var ConfigManager = /** @class */ (function () {
+    function ConfigManager() {
+    }
+    /**
+     * 配置注册
+     *
+     * 1、写下json名字，对应的 配置类
+     *
+     * 标识
+     */
+    ConfigManager.prototype.getClass = function (name, data) {
+        switch (name) {
+            case "defender": return new DefenderConfig_1.default(data);
+            case "monster": return new MosnterConfigr_1.default(data);
+        }
+    };
+    /**
+     * Json配置获取
+     *
+     * 写需要获取的配置文件
+     */
+    ConfigManager.prototype.loadConfig = function () {
+        var arr = [
+            { "defender": "outside/config/gameConfig/defender.json" },
+            { "monster": "outside/config/gameConfig/monster.json" }
+        ];
+        this.loadObj(arr);
+    };
+    /**
+     * 资源加载
+     */
+    ConfigManager.prototype.loadObj = function (arr) {
+        var obj;
+        var name;
+        for (var i = 0; i < arr.length; i++) {
+            obj = arr[i];
+            name = Object.keys(obj)[0];
+            this[name + "Config"] = Laya.loader.getRes(obj[name]);
+        }
+    };
+    /**
+     * 获取配置 @configNmae : Json文件名  @想获取什么怪物id
+     */
+    ConfigManager.prototype.getConfigById = function (configName, configId) {
+        var configObj = this[configName + "Config"];
+        var typeArr = [];
+        for (var i = 0; i < configObj.length; i++) {
+            var obj = configObj[i];
+            if (obj[configName + "Id"] == configId) {
+                return this.getClass(configName, obj);
+            }
+        }
+    };
+    ConfigManager.ins = new ConfigManager();
+    return ConfigManager;
+}());
+exports.default = ConfigManager;
+},{"../Data/Config/DefenderConfig":17,"../Data/Config/MosnterConfigr":18}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /*
 * 游戏配置
 */
 var GameConfig = /** @class */ (function () {
-    // /**ip - 本地测试*/
-    // public static IP : string = "127.0.0.1";
-    // /**端口 - 本地测试*/
-    // public static PORT : number = 7777;
     function GameConfig() {
     }
     /**ip*/
-    GameConfig.IP = "47.107.169.244";
+    // public static IP : string = "47.107.169.244";
     /**端口 */
+    // public static PORT : number = 7777  ;
+    // /**ip - 本地测试*/
+    GameConfig.IP = "127.0.0.1";
+    // /**端口 - 本地测试*/
     GameConfig.PORT = 7777;
     return GameConfig;
 }());
@@ -549,6 +622,13 @@ exports.GameConfig = GameConfig;
 var Protocol = /** @class */ (function () {
     function Protocol() {
     }
+    //****************UserProto.proto
+    /**请求 msgId = 101103 */
+    Protocol.REQ_USER_LOGIN = 101103;
+    /**101104 注册请求 */
+    Protocol.REQ_USER_REGISTER = 101104;
+    /**响应 msgId = 101203 */
+    Protocol.RES_USER_LOGIN = 101203;
     // //************gmMessage.proto
     // /**发送GM密令 */
     // public static REQ_GM_COM:number = 199101;
@@ -578,13 +658,6 @@ var Protocol = /** @class */ (function () {
     // public static RESP_SERV_ERROR:number = 101202;
     // /**返回被顶下线 */
     // public static RESP_SUBSTITUTE:number = 101203;
-    //****************UserProto.proto
-    /**请求 msgId = 101103 */
-    Protocol.REQ_USER_LOGIN = 101103;
-    /**101104 注册请求 */
-    Protocol.REQ_USER_REGISTER = 101104;
-    /**响应 msgId = 101203 */
-    Protocol.RES_USER_LOGIN = 101203;
     /**请求匹配对局102101 */
     Protocol.REQ_MATCH = 102101;
     /**请求 对局接受102102 */
@@ -596,7 +669,7 @@ var Protocol = /** @class */ (function () {
     return Protocol;
 }());
 exports.Protocol = Protocol;
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FloatMsg_1 = require("../Tool/FloatMsg");
@@ -638,7 +711,7 @@ var MessageManager = /** @class */ (function () {
     return MessageManager;
 }());
 exports.default = MessageManager;
-},{"../Tool/FloatMsg":20,"../Tool/Tool":21}],11:[function(require,module,exports){
+},{"../Tool/FloatMsg":24,"../Tool/Tool":25}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var WebSocketManager_1 = require("./WebSocketManager");
@@ -709,7 +782,7 @@ var ClientSender = /** @class */ (function () {
     return ClientSender;
 }());
 exports.default = ClientSender;
-},{"../Const/GameConfig":9,"./WebSocketManager":15}],12:[function(require,module,exports){
+},{"../Const/GameConfig":10,"./WebSocketManager":16}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /*
@@ -766,7 +839,7 @@ var PackageIn = /** @class */ (function (_super) {
     return PackageIn;
 }(Laya.Byte));
 exports.default = PackageIn;
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var WebSocketManager_1 = require("./WebSocketManager");
@@ -814,7 +887,7 @@ var PackageOut = /** @class */ (function (_super) {
     return PackageOut;
 }(Laya.Byte));
 exports.default = PackageOut;
-},{"./WebSocketManager":15}],14:[function(require,module,exports){
+},{"./WebSocketManager":16}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /*
@@ -850,7 +923,7 @@ var SocketHandler = /** @class */ (function () {
     return SocketHandler;
 }());
 exports.default = SocketHandler;
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Dictionary_1 = require("../../Tool/Dictionary");
@@ -1070,226 +1143,52 @@ var WebSocketManager = /** @class */ (function () {
     return WebSocketManager;
 }());
 exports.default = WebSocketManager;
-},{"../../Tool/Dictionary":19,"./PackageIn":12,"./PackageOut":13}],16:[function(require,module,exports){
+},{"../../Tool/Dictionary":23,"./PackageIn":13,"./PackageOut":14}],17:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/**This class is automatically generated by LayaAirIDE, please do not make any modifications. */
-var GameController_1 = require("./Controller/Game/GameController");
-var GameLobbyController_1 = require("./Controller/GameLobby/GameLobbyController");
-var LoadingController_1 = require("./Controller/Loading/LoadingController");
-var WelComeController_1 = require("./Controller/WelCome/WelComeController");
-/*
-* 游戏初始化配置;
-*/
-var GameConfig = /** @class */ (function () {
-    function GameConfig() {
-    }
-    GameConfig.init = function () {
-        var reg = Laya.ClassUtils.regClass;
-        reg("Controller/Game/GameController.ts", GameController_1.default);
-        reg("Controller/GameLobby/GameLobbyController.ts", GameLobbyController_1.default);
-        reg("Controller/Loading/LoadingController.ts", LoadingController_1.default);
-        reg("Controller/WelCome/WelComeController.ts", WelComeController_1.default);
-    };
-    GameConfig.width = 1440;
-    GameConfig.height = 750;
-    GameConfig.scaleMode = "fixedheight";
-    GameConfig.screenMode = "none";
-    GameConfig.alignV = "top";
-    GameConfig.alignH = "left";
-    GameConfig.startScene = "Welcome/Login.scene";
-    GameConfig.sceneRoot = "";
-    GameConfig.debug = false;
-    GameConfig.stat = false;
-    GameConfig.physicsDebug = false;
-    GameConfig.exportSceneToJson = true;
-    return GameConfig;
-}());
-exports.default = GameConfig;
-GameConfig.init();
-},{"./Controller/Game/GameController":3,"./Controller/GameLobby/GameLobbyController":1,"./Controller/Loading/LoadingController":6,"./Controller/WelCome/WelComeController":7}],17:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var GameConfig_1 = require("./GameConfig");
+var baseConfig_1 = require("./baseConfig");
 /**
- * 游戏入口
+ * 防御塔数据模型
  */
-var GameEnter = /** @class */ (function () {
-    //
-    function GameEnter() {
-        this.init();
+var DefenderConfig = /** @class */ (function (_super) {
+    __extends(DefenderConfig, _super);
+    function DefenderConfig(data) {
+        return _super.call(this, data) || this;
     }
-    /**初始化 */
-    GameEnter.prototype.init = function () {
-        this.load();
-    };
-    /**资源加载 */
-    GameEnter.prototype.load = function () {
-        var asseteArr = [
-            { url: "unpackage/welcome_bg.png" },
-            { url: "Welcome/loginbox.png" },
-            { url: "Welcome/progressBg.png" },
-            { url: "res/atlas/comp.atlas" },
-            { url: "res/atlas/welcome.atlas" }
-        ];
-        Laya.loader.load(asseteArr, Laya.Handler.create(this, this.onload));
-    };
-    GameEnter.prototype.onload = function () {
-        GameConfig_1.default.startScene && Laya.Scene.open(GameConfig_1.default.startScene);
-    };
-    return GameEnter;
-}());
-exports.default = GameEnter;
-},{"./GameConfig":16}],18:[function(require,module,exports){
+    return DefenderConfig;
+}(baseConfig_1.default));
+exports.default = DefenderConfig;
+},{"./baseConfig":19}],18:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var GameConfig_1 = require("./GameConfig");
-var GameEnter_1 = require("./GameEnter");
-var Main = /** @class */ (function () {
-    function Main() {
-        //根据IDE设置初始化引擎		
-        if (window["Laya3D"])
-            Laya3D.init(GameConfig_1.default.width, GameConfig_1.default.height);
-        else
-            Laya.init(GameConfig_1.default.width, GameConfig_1.default.height, Laya["WebGL"]);
-        Laya["Physics"] && Laya["Physics"].enable();
-        Laya["DebugPanel"] && Laya["DebugPanel"].enable();
-        Laya.stage.scaleMode = GameConfig_1.default.scaleMode;
-        Laya.stage.screenMode = GameConfig_1.default.screenMode;
-        //兼容微信不支持加载scene后缀场景
-        Laya.URL.exportSceneToJson = GameConfig_1.default.exportSceneToJson;
-        //打开调试面板（通过IDE设置调试模式，或者url地址增加debug=true参数，均可打开调试面板）
-        if (GameConfig_1.default.debug || Laya.Utils.getQueryString("debug") == "true")
-            Laya.enableDebugPanel();
-        if (GameConfig_1.default.physicsDebug && Laya["PhysicsDebugDraw"])
-            Laya["PhysicsDebugDraw"].enable();
-        if (GameConfig_1.default.stat)
-            Laya.Stat.show();
-        Laya.alertGlobalError = true;
-        //激活资源版本控制，version.json由IDE发布功能自动生成，如果没有也不影响后续流程
-        Laya.ResourceVersion.enable("version.json", Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);
+var baseConfig_1 = require("./baseConfig");
+/**
+ * 怪物数据模型
+ */
+var MonsterConfig = /** @class */ (function (_super) {
+    __extends(MonsterConfig, _super);
+    function MonsterConfig(data) {
+        return _super.call(this, data) || this;
     }
-    Main.prototype.onVersionLoaded = function () {
-        //激活大小图映射，加载小图的时候，如果发现小图在大图合集里面，则优先加载大图合集，而不是小图
-        Laya.AtlasInfoManager.enable("fileconfig.json", Laya.Handler.create(this, this.onConfigLoaded));
-    };
-    Main.prototype.onConfigLoaded = function () {
-        new GameEnter_1.default();
-        //加载IDE指定的场景
-    };
-    return Main;
-}());
-//激活启动类
-new Main();
-},{"./GameConfig":16,"./GameEnter":17}],19:[function(require,module,exports){
+    return MonsterConfig;
+}(baseConfig_1.default));
+exports.default = MonsterConfig;
+},{"./baseConfig":19}],19:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
-    * 词典 key-value
-    *
-    *
-    *  keys : Array
-    *  [read-only] 获取所有的子元素键名列表。
-    *  Dictionary
-    *
-    *  values : Array
-    *  [read-only] 获取所有的子元素列表。
-    *  Dictionary
-    *  Public Methods
-    *
-    *
-    *  clear():void
-    *  清除此对象的键名列表和键值列表。
-    *  Dictionary
-    *
-    *  get(key:*):*
-    *  返回指定键名的值。
-    *  Dictionary
-    *
-    *  indexOf(key:Object):int
-    *  获取指定对象的键名索引。
-    *  Dictionary
-    *
-    *  remove(key:*):Boolean
-    *  移除指定键名的值。
-    *  Dictionary
-    *
-    *  set(key:*, value:*):void
-    *  给指定的键名设置值。
+ * 基础数据结构
  */
-var Dictionary = /** @class */ (function () {
-    function Dictionary() {
-        this.keys = new Array();
-        this.values = new Array();
+var baseConfig = /** @class */ (function () {
+    function baseConfig(data) {
+        var arr = Object.keys(data);
+        for (var i = 0; i < arr.length; i++) {
+            this[arr[i]] = data[arr[i]];
+        }
     }
-    /**设置 键名 - 键值 */
-    Dictionary.prototype.set = function (key, value) {
-        for (var i = 0; i < this.keys.length; i++) {
-            if (this.keys[i] === undefined) {
-                this.keys[i] = key;
-                this.values[i] = value;
-                return;
-            }
-        }
-        this.keys.push(key);
-        this.values.push(value);
-        console.log("【Dictionary】 - 插入key[" + key + "]");
-        console.log("value", value);
-    };
-    /**通过 键名key 获取键值value  */
-    Dictionary.prototype.get = function (key) {
-        // this.getDicList(); 
-        for (var i = 0; i < this.keys.length; i++) {
-            if (this.keys[i] === key) {
-                return this.values[i];
-            }
-        }
-        console.log("【Dictionary】 - 词典中没有key的值");
-    };
-    /**获取对象的索引值 */
-    Dictionary.prototype.indexOf = function (value) {
-        for (var i = 0; i < this.values.length; i++) {
-            if (this.values[i] === value) {
-                return i;
-            }
-        }
-        console.log("【Dictionary】 - 词典中没有该值");
-        return undefined;
-    };
-    /**清除 词典中指定键名的剪 */
-    Dictionary.prototype.remove = function (key) {
-        for (var i = 0; i < this.keys.length; i++) {
-            if (this.keys[i] === key) {
-                this.keys[i] === undefined;
-                this.values[i] === undefined;
-                console.log("【Dictionary】 - 移除成功");
-            }
-        }
-        console.log("【Dictionary】 - 移除失败");
-    };
-    /**清除所有的键 */
-    Dictionary.prototype.clear = function () {
-        this.keys = [];
-        this.values = [];
-    };
-    /**获取列表 */
-    Dictionary.prototype.getDicList = function () {
-        for (var i = 0; i < this.keys.length; i++) {
-            console.log("【" + i + "】-----------key:" + this.keys[i]);
-            console.log("value", this.values[i]);
-        }
-    };
-    /**获取键值数组 */
-    Dictionary.prototype.getValuesArr = function () {
-        return this.values;
-    };
-    /**获取键名数组 */
-    Dictionary.prototype.getKeysArr = function () {
-        return this.keys;
-    };
-    return Dictionary;
+    return baseConfig;
 }());
-exports.default = Dictionary;
+exports.default = baseConfig;
 },{}],20:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
