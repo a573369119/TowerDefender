@@ -3,6 +3,7 @@ import WebSocketManager from "../../Core/Net/WebSocketManager";
 import { Protocol, GameConfig } from "../../Core/Const/GameConfig";
 import MatchHandler from "../GameLobby/handler/MatchHandler";
 import ClientSender from "../../Core/Net/ClientSender";
+import MessageManager from "../../Core/MessageManager";
 export default class GameLobbyController extends ui.GameLobby.GameLobbyUI{
     constructor(){
         super();

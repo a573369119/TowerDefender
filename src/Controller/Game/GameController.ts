@@ -1,6 +1,9 @@
 import { ui } from "../../ui/layaMaxUI";
 import GrassFactory from "./GrassFactory";
+import MessageManager from "../../Core/MessageManager";
 export default class GameController extends ui.Game.GameUI{
+    /**单例 */
+    public static Instance:GameController;
     /**上次鼠标得位置 */
     private lastMousePosX:number;
     /**是否正在使用铲子 */
@@ -12,17 +15,29 @@ export default class GameController extends ui.Game.GameUI{
     /**红方草坪 */
     private redFac:GrassFactory;
     /**己方草坪 */
-    private myFac:GrassFactory;
+    public myFac:GrassFactory;
     constructor(){
         super();
-        this.redFac=new GrassFactory("red",this.game);
-        this.blueFac=new GrassFactory("blue",this.game);
+        
     }
     
     onEnable():void
     {
+        
+        GameController.Instance=this;
+        this.redFac=new GrassFactory("red",this.game);
+        this.blueFac=new GrassFactory("blue",this.game);
         this.camp="red";
+        this.isCickGrass();
         Laya.timer.frameLoop(1,this,this.mapMove);
+        if(this.camp=="blue")
+        {
+           this.myFac=this.blueFac;
+        }
+        else
+        {
+           this.myFac=this.redFac;
+        }
     }
 
     /**地图移动 */
@@ -43,38 +58,26 @@ export default class GameController extends ui.Game.GameUI{
         if(this.camp=="blue")
         {
            this.game.x=-1230;
-           this.myFac=this.blueFac;
         }
         else
         {
            this.game.x=0;
-           this.myFac=this.redFac;
         }
         this.MenuItem.visible=true;
         this.isUseShovel=false;
         this.addEvents();
-        //this.isCickGrass();
-        
-        let sp=new Laya.Sprite();
-        sp.graphics.drawTexture(Laya.loader.getRes("game/mud.png"));
-        sp.autoSize=true;
-        Laya.stage.addChild(sp);
-        sp.on(Laya.Event.CLICK,this,this.check);
+        this.monsterOccupy();
     } 
      
     /**事件绑定 */
     private addEvents() : void
     {
-        //Laya.stage.on(Laya.Event.MOUSE_DOWN,this,this.onMouseDown);
-        //Laya.stage.on(Laya.Event.MOUSE_UP,this,this.onMouseUp);
+        Laya.stage.on(Laya.Event.MOUSE_DOWN,this,this.onMouseDown);
+        Laya.stage.on(Laya.Event.MOUSE_UP,this,this.onMouseUp);
         this.shovelbg.on(Laya.Event.MOUSE_DOWN,this,this.onShovelDown);
-        
+        this.btn_check.on(Laya.Event.MOUSE_DOWN,this,this.checkCreateComplete);
     } 
 
-    check():void
-    {
-        console.log("是否可注册");
-    }
     /*******************************************鼠标事件 **************************************/
     /**鼠标按下 */
     private onMouseDown():void
@@ -126,25 +129,49 @@ export default class GameController extends ui.Game.GameUI{
         this.isUseShovel=!this.isUseShovel;
         this.shovel_off.visible=!this.shovel_off.visible;
         this.shovel_on.visible=!this.shovel_on.visible;
-        //this.isCickGrass();
+        this.isCickGrass();
     }
 
     /**判断草坪块是否可点击 */
     private isCickGrass():void
     {
-        /*for(let i=0;i<this.myFac.grassArray.length;i++)
+        //收起铲子就不能点击草坪块，相反则可
+        if(this.isUseShovel)
         {
-            //收起铲子就不能点击草坪块，相反则可
-            if(this.isUseShovel)
-            {
-                this.myFac.grassArray[i].sp.mouseEnabled=true;
-            }
-            else
-            {
-                this.myFac.grassArray[i].sp.mouseEnabled=false;
-            }
-        }*/
+            this.game.mouseEnabled=true;
+        }
+        else
+        {
+            this.game.mouseEnabled=false;
+        }    
     }
 
-    
+    /**怪物最先占领一个土块 */
+    private monsterOccupy():void
+    {
+        //随机取一个10号位草坪变为土块作为怪兽出生点
+        this.myFac.grassArray[10].changeImg();
+        this.myFac.grassArray[10].sp.off(Laya.Event.CLICK,this.myFac.grassArray[10],this.myFac.grassArray[10].changeState);
+    }
+
+    /**检查是否建好好路径 */
+    private checkCreateComplete():void
+    {
+        if(this.myFac.mudArray[this.myFac.mudArray.length-1]==this.myFac.grassArray[39])
+        {
+            //todo
+            this.onShovelDown();
+            this.shovelbg.visible=false;
+            this.game.mouseEnabled=false;
+            this.isCickGrass();       
+            this.btn_check.off(Laya.Event.MOUSE_DOWN,this,this.onShovelDown);
+            this.btn_check.visible=false;
+            MessageManager.ins.showFloatMsg("修建成功！");
+        }
+        else
+        {
+            //否则就不能点击其他区域的草坪
+            MessageManager.ins.showFloatMsg("请正确修建道路！");
+        }
+    }
 }

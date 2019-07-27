@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":2,
-    "selecteID":742,
+    "selectedBox":744,
+    "selecteID":746,
     "searchKey":"Scene",
     "props":{"width":1440,"sceneColor":"#000000","runtime":"Controller/Game/GameController.ts","height":750},
     "nodeParent":-1,
-    "maxID":747,
+    "maxID":765,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -18,17 +18,16 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,game",
-            "props":{"var":"game","mouseThrough":false,"mouseEnabled":false},
+            "props":{"var":"game","mouseThrough":true,"mouseEnabled":true},
             "nodeParent":2,
             "label":"game",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":742,
             "child":[
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,Woods",
                     "props":{"y":0,"x":0,"var":"Woods"},
@@ -1407,13 +1406,12 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,Walls",
                     "props":{"y":0,"x":0,"var":"Walls"},
                     "nodeParent":742,
                     "label":"Walls",
-                    "isOpen":null,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
@@ -1538,7 +1536,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1142,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1142,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1551,7 +1549,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1167,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1167,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1564,7 +1562,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1192,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1192,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1694,7 +1692,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1709,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1709,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1707,7 +1705,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1684,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1684,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1720,7 +1718,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1659,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1659,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1733,7 +1731,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1634,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1634,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1746,7 +1744,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1217,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1217,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1759,7 +1757,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1242,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1242,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1772,7 +1770,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1267,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1267,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1785,7 +1783,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1292,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1292,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1798,7 +1796,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1317,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1317,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1811,7 +1809,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1609,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1609,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1824,7 +1822,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1587,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1584,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1837,7 +1835,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1562,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1559,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1850,7 +1848,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1367,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1367,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1863,7 +1861,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1342,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1342,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1876,7 +1874,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1537,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1534,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1889,7 +1887,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1512,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1509,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -1902,7 +1900,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":200,"x":1487,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":300,"x":1484,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":492,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2236,6 +2234,110 @@
                                     "compId":714,
                                     "child":[
                                         ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":225,"x":1117,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":492,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":747,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":250,"x":1117,"width":25,"texture":"game/wall.png","rotation":0,"height":25},
+                                    "nodeParent":492,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":748,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":275,"x":1117,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":492,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":749,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":300,"x":1117,"width":25,"texture":"game/wall.png","rotation":0,"height":25},
+                                    "nodeParent":492,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":750,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":225,"x":1734,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":492,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":751,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":250,"x":1734,"width":25,"texture":"game/wall.png","rotation":0,"height":25},
+                                    "nodeParent":492,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":752,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":275,"x":1734,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":492,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":753,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":300,"x":1734,"width":25,"texture":"game/wall.png","rotation":0,"height":25},
+                                    "nodeParent":492,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":754,
+                                    "child":[
+                                        ]
                                 }]
                         },
                         {
@@ -2357,7 +2459,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1142,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1142,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2370,7 +2472,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1167,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1167,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2383,7 +2485,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1192,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1192,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2513,7 +2615,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1710,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1710,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2526,7 +2628,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1685,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1685,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2539,7 +2641,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1660,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1660,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2552,7 +2654,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1635,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1635,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2565,7 +2667,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1217,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1217,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2591,7 +2693,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1242,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1242,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2604,7 +2706,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1267,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1267,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2617,7 +2719,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1292,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1292,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2630,7 +2732,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1317,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1317,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2643,7 +2745,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1342,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1342,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2656,7 +2758,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1367,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1367,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2669,7 +2771,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1585,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1585,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2682,7 +2784,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1610,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1610,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2695,7 +2797,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1560,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1560,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2708,7 +2810,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1535,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1535,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2721,7 +2823,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1510,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1510,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -2734,7 +2836,7 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"y":0,"x":1485,"width":25,"texture":"game/wall.png","height":25},
+                                    "props":{"y":-100,"x":1485,"width":25,"texture":"game/wall.png","height":25},
                                     "nodeParent":520,
                                     "label":"Sprite",
                                     "isDirectory":false,
@@ -3055,11 +3157,114 @@
                                     "compId":738,
                                     "child":[
                                         ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":-25,"x":1117,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":520,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":755,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":-50,"x":1117,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":520,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":756,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":-75,"x":1117,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":520,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":757,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":-100,"x":1117,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":520,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":758,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":-50,"x":1735,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":520,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":759,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":-25,"x":1735,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":520,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":760,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":-100,"x":1735,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":520,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":761,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"y":-75,"x":1735,"width":25,"texture":"game/wall.png","height":25},
+                                    "nodeParent":520,
+                                    "label":"Sprite",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":762,
+                                    "child":[
+                                        ]
                                 }]
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,Groups",
                     "props":{"y":0,"x":0,"var":"Groups"},
@@ -3126,10 +3331,9 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,road",
-                    "props":{"y":225,"x":1117,"width":644,"var":"road","texture":"game/road.png","height":300},
+                    "props":{"y":325,"x":1117,"width":643,"var":"road","texture":"game/road.png","height":100},
                     "nodeParent":742,
                     "label":"road",
                     "isDirectory":false,
@@ -3147,49 +3351,66 @@
             "props":{"visible":false,"var":"MenuItem"},
             "nodeParent":2,
             "label":"MenuItem",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":745,
             "child":[
                 {
-                    "type":"Sprite",
-                    "searchKey":"Sprite,shovel_off",
-                    "props":{"y":8,"x":1320,"width":97,"var":"shovel_off","texture":"game/shovel_off.png","height":95},
-                    "nodeParent":745,
-                    "label":"shovel_off",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":743,
-                    "child":[
-                        ]
-                },
-                {
-                    "type":"Sprite",
-                    "searchKey":"Sprite,shovel_on",
-                    "props":{"y":8,"x":1320,"width":97,"visible":false,"var":"shovel_on","texture":"game/shovel_on.png","height":95},
-                    "nodeParent":745,
-                    "label":"shovel_on",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":746,
-                    "child":[
-                        ],
-                    "$HIDDEN":true
-                },
-                {
+                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,shovelbg",
                     "props":{"y":0,"x":1312,"var":"shovelbg","texture":"gameLobby/player_icon_bg.png"},
                     "nodeParent":745,
                     "label":"shovelbg",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":744,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite,shovel_off",
+                            "props":{"y":8,"x":8,"width":97,"var":"shovel_off","texture":"game/shovel_off.png","height":95},
+                            "nodeParent":744,
+                            "label":"shovel_off",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":743,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "x":45,
+                            "type":"Sprite",
+                            "searchKey":"Sprite,shovel_on",
+                            "props":{"y":8,"x":8,"width":97,"visible":false,"var":"shovel_on","texture":"game/shovel_on.png","height":95},
+                            "nodeParent":744,
+                            "label":"shovel_on",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":746,
+                            "child":[
+                                ],
+                            "$HIDDEN":true
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Sprite",
+                    "searchKey":"Sprite,btn_check",
+                    "props":{"y":198,"x":1312,"var":"btn_check","texture":"game/sure_0.png"},
+                    "nodeParent":745,
+                    "label":"btn_check",
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":744,
+                    "compId":763,
                     "child":[
                         ]
                 }]

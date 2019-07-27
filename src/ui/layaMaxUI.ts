@@ -32,9 +32,10 @@ export module ui.Game {
 		public blue_door:Laya.Sprite;
 		public road:Laya.Sprite;
 		public MenuItem:Laya.Sprite;
+		public shovelbg:Laya.Sprite;
 		public shovel_off:Laya.Sprite;
 		public shovel_on:Laya.Sprite;
-		public shovelbg:Laya.Sprite;
+		public btn_check:Laya.Sprite;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
