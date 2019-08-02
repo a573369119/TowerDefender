@@ -1,0 +1,1 @@
+{"type":"Sprite","props":{"y":0,"x":0,"texture":"game/bullet.png","presetID":1,"isPresetRoot":true},"compId":767,"child":[{"type":"Script","props":{"presetID":2,"runtime":"Controller/Game/Prefab/Bullet.ts"},"compId":768}],"loadList":["game/bullet.png"],"loadList3D":[]}

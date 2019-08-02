@@ -14,21 +14,32 @@ export default class MonsterConfig extends baseConfig{
      */
     public monsterName : string;
     /**
-     * 怪物类型 1金2木3水4火5土
-     */
-    public type : number;
-    /**
      * 攻击力
      */
     public power : number;
     /**
-     * 防御力
-     */
-    public def : number;
-    /**
      * 移动速度
      */
     public speed : number;
+    /**
+     * 血量
+     */
+    public hp:number;
+    /**
+     * 价格
+     */
+    public price:number;
+
+    /******************************即将开放*********************************** */
+    /**
+     * 防御力
+     */
+    //public def : number;
+
+    /**
+     * 怪物类型 1金2木3水4火5土
+     */
+    //public type : number;
 
     constructor(data){
         super(data);

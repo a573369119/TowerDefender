@@ -1,4 +1,5 @@
-import Grass from "./Grass";
+import Grass from "./Prefab/Grass";
+
 export default class GrassFactory {
     /**草坪数组 */
     public grassArray:Array<Grass>;
@@ -6,7 +7,7 @@ export default class GrassFactory {
     public mudArray:Array<Grass>;
     constructor(camp:string,view:Laya.Sprite)
     {
-        this.grassArray=new Array<Grass>();
+        this.grassArray = new Array<Grass>();
         this.mudArray=new Array<Grass>();
         this.createGrassArray(camp,view);
     }
@@ -18,7 +19,7 @@ export default class GrassFactory {
         {
             for(let j=0;j<10;j++)
             {
-                let grass;
+                let grass:Grass;
                 if(i%2==0)
                 {
                     grass=new Grass(j%2+1,view);
@@ -28,15 +29,7 @@ export default class GrassFactory {
                     grass=new Grass((j+1)%2+1,view);
                 }
                 this.grassArray.push(grass);
-                if(camp=="red")
-                {
-                    grass.sp.pos(120+100*j,25+100*i);
-                }
-                else
-                {
-                    grass.sp.pos(1759+100*j,25+100*i);
-                }
-                
+                grass.Pos(i,j);
             }
         }    
         

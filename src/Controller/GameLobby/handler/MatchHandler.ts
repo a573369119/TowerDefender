@@ -2,7 +2,7 @@ import SocketHandler from "../../../Core/Net/SocketHandler";
 import WebSocketManager from "../../../Core/Net/WebSocketManager";
 
 /**
- * 请求匹配对局
+ * 返回匹配信息 只发送一次
  */
 export default class MatchHandler extends SocketHandler{
     

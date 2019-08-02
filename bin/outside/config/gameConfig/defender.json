@@ -1,8 +1,8 @@
 [
-    {"defenderId":1,"defenderName":"防御塔1","type":1,"power":10,"dic":10,"attackSpeed":1},
-    {"defenderId":2,"defenderName":"防御塔2","type":2,"power":10,"dic":10,"attackSpeed":1},
-    {"defenderId":3,"defenderName":"防御塔3","type":3,"power":10,"dic":10,"attackSpeed":1},
-    {"defenderId":4,"defenderName":"防御塔4","type":4,"power":10,"dic":10,"attackSpeed":1},
-    {"defenderId":5,"defenderName":"防御塔5","type":5,"power":10,"dic":10,"attackSpeed":1}
+    {"defenderId":1,"defenderName":"defender1","power":5,"dic":200,"attackSpeed":1,"attackFrequency":1,"price":10},
+    {"defenderId":2,"defenderName":"defender2","power":10,"dic":200,"attackSpeed":1,"attackFrequency":1,"price":20},
+    {"defenderId":3,"defenderName":"defender3","power":15,"dic":200,"attackSpeed":1,"attackFrequency":1,"price":30},
+    {"defenderId":4,"defenderName":"defender4","power":20,"dic":200,"attackSpeed":1,"attackFrequency":1,"price":40},
+    {"defenderId":5,"defenderName":"defender5","power":25,"dic":200,"attackSpeed":1,"attackFrequency":1,"price":50}
 ]
 

@@ -1,5 +1,6 @@
 import { ui } from "../../ui/layaMaxUI";
 import ConfigManager from "../../Core/ConfigManager";
+import WelComeController from "../WelCome/WelComeController";
 export default class LoadingController extends ui.PlayerLoadingUI{
     /**是否连接上服务器 */
     private isConnectServer : boolean;
@@ -9,18 +10,19 @@ export default class LoadingController extends ui.PlayerLoadingUI{
 
     onEnable(){
         this.isConnectServer = false; 
+        this.selectMode();
         this.loadAssets();
     }
-
+    
     /**加载游戏场景资源 */
     private loadAssets() : void
     {
         let src = [
             //图集加载
-            {url:"res/atlas/game.atlas"},      
+            {url:"res/atlas/game.atlas"}, 
+            {url:"res/atlas/game/ani.atlas"}     
         ];
         Laya.loader.load(src,Laya.Handler.create(this,this.onLoad),Laya.Handler.create(this,this.onProcess));
-        this.onLoad();
     }
 
     /**加载进程 */
@@ -41,6 +43,35 @@ export default class LoadingController extends ui.PlayerLoadingUI{
         this.EnterGame();
     }
 
+    /**确定游戏模式，显示玩家信息，界面上方显示红方玩家，下方显示蓝方玩家*/
+    private selectMode():void
+    {
+        if(WelComeController.ins.mode=="1V1")
+        {
+            for(let i=0;i<5;i++)
+            {
+                this.red_group._children[i].visible=false;
+                this.blue_group._children[i].visible=false;
+            }
+            this.red_player_3.visible=true;
+            this.blue_player_3.visible=true;
+        }
+
+        if(WelComeController.ins.ownPlayer.camp=="red")
+        {
+            this.icon_red_player_3.loadImage(WelComeController.ins.ownPlayer.icon);
+            this.name_red_player_3.text=WelComeController.ins.ownPlayer.name;
+            this.icon_blue_player_3.loadImage(WelComeController.ins.enemyPlayer.icon);
+            this.name_blue_player_3.text=WelComeController.ins.enemyPlayer.name;
+        }
+        else
+        {
+            this.icon_blue_player_3.loadImage(WelComeController.ins.ownPlayer.icon);
+            this.name_blue_player_3.text=WelComeController.ins.ownPlayer.name;
+            this.icon_red_player_3.loadImage(WelComeController.ins.enemyPlayer.icon);
+            this.name_red_player_3.text=WelComeController.ins.enemyPlayer.name;
+        }
+    }
     /**进入游戏 */
     private EnterGame() : void
     {

@@ -6,16 +6,26 @@ import ClientSender from "../../Core/Net/ClientSender";
 import Tool from "../../Tool/Tool";
 import MessageManager from "../../Core/MessageManager";
 import ConfigManager from "../../Core/ConfigManager";
+import Player from "./Player";
 
 export default class WelComeController extends ui.Welcome.LoginUI{
+    /**单例 */
+    public static ins:WelComeController;
     /**是否连接上服务器 */
     private isConnectServer : boolean;
+    /**玩家信息 */
+    public ownPlayer:Player;
+    /**敌方玩家信息 */
+    public enemyPlayer:Player;
+    /**游戏模式 */
+    public mode:string;
     constructor(){
         super();
     }
     /////////////生命周期
     /**启动 */
     onEnable(){
+        WelComeController.ins=this;
         this.dataInit();
         this.setCenter();
         this.loadAssets();
@@ -105,6 +115,7 @@ export default class WelComeController extends ui.Welcome.LoginUI{
     private onLogin() : void
     {
         //ClientSender.reqUserLogin(this.input_userName.text,this.input_userKey.text);
+        this.ownPlayer=new Player("张三","gameLobby/player_icon.png");
         Laya.Scene.open("GameLobby/GameLobby.scene");
     }
 

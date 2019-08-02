@@ -34,7 +34,7 @@ export class GameConfig{
 
 /**协议 */
 export class Protocol{
-     //****************UserProto.proto
+    //****************UserProto.proto
     /**请求 msgId = 101103 */
     public static REQ_USER_LOGIN : number = 101103;
     /**101104 注册请求 */
@@ -44,10 +44,32 @@ export class Protocol{
     public static RES_USER_LOGIN : number = 101203;
 
     
+    //****************MatchProto.proto
+    /**请求匹配对局102101 */
+    public static REQ_MATCH:number=102101;
+    /**请求 对局接受102102 */
+    public static REQ_MATCH_ACCEPT:number=102102;
+
+    /**响应 返回匹配信息 只发送一次msgId = 102201 */
+    public static RES_MATCH_INFO : number = 102201;
+    /**响应 返回对局接受消息msgId = 10202 */
+    public static RES_MATCH_ACCEPT_INFO : number = 10202;
 
 
+    //****************GameProto.proto
+    /**请求资源加载完毕  返回103201 */
+    public static REQ_ONLOAD:number=103201;
+    /**请求地图垒好 返回103202 */
+    public static REQ_MAPOVER:number=103202;
+    /**每回合怪物投放好之后 或者时间到了请求完成  103103*/
+    public static REQ_PUTMONSTEROVER:number=103103;
 
-
+    /**当所有人都加载好了之后返回游戏开始消息 103201 */
+    public static RES_ONLOAD:number=103201;
+    /**返回 所有的地图路径信息 103202 */
+    public static RES_ALLMAPINFO:number=103202;
+    /**返回给双方，每回合的怪物 103203 */
+    public static RES_MONSTERINFO:number=103203;
     // //************gmMessage.proto
     // /**发送GM密令 */
     // public static REQ_GM_COM:number = 199101;
@@ -83,14 +105,7 @@ export class Protocol{
 
 
 
-    /**请求匹配对局102101 */
-    public static REQ_MATCH:number=102101;
-    /**请求 对局接受102102 */
-    public static REQ_MATCH_ACCEPT:number=102102;
-    /**响应 返回匹配信息 只发送一次msgId = 102201 */
-    public static RES_MATCH_INFO : number = 102201;
-    /**响应 返回对局接受消息msgId = 10202 */
-    public static RES_MATCH_ACCEPT_INFO : number = 10202;
+    
     // //************playerMessage.proto
     // //请求
     // /**请求扭蛋 msgId=102101 */

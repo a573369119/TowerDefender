@@ -41,7 +41,7 @@ export default class WebSocketManager {
        this.webSocket.on(Laya.Event.ERROR,this,this.webSocketError);
        //加载协议
        if(!this.protoRoot){
-           var protoBufUrls = ["outside/proto/UserProto.proto","outside/proto/MatchProto.proto"];
+           var protoBufUrls = ["outside/proto/UserProto.proto","outside/proto/MatchProto.proto","outside/proto/GameProto.proto"];
            Laya.Browser.window.protobuf.load(protoBufUrls,this.protoLoadComplete);
             
        }

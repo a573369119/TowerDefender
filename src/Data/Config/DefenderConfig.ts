@@ -15,10 +15,6 @@ export default class DefenderConfig extends baseConfig{
      */
     public defenderName : string;
     /**
-     * 类型 1金2木3水4火5土
-     */
-    public type : number;
-    /**
      * 防御塔攻击力
      */
     public power : number;
@@ -30,6 +26,19 @@ export default class DefenderConfig extends baseConfig{
      * 攻击速度
      */
     public attackSpeed : number;
+    /**
+     * 攻击频率
+     */
+    public attackFrequency : number;
+    /**
+     * 价格
+     */
+    public price : number;
+    /******************************即将开放*********************************** */
+    /**
+     * 类型 1金2木3水4火5土
+     */
+    //public type : number;
 
     constructor(data){
         super(data);

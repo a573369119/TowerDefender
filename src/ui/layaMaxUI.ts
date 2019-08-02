@@ -31,11 +31,19 @@ export module ui.Game {
 		public blue_group:Laya.Sprite;
 		public blue_door:Laya.Sprite;
 		public road:Laya.Sprite;
-		public MenuItem:Laya.Sprite;
+		public blue_player_icon:Laya.Sprite;
+		public red_player_icon:Laya.Sprite;
+		public player_menuitem:Laya.Sprite;
 		public shovelbg:Laya.Sprite;
 		public shovel_off:Laya.Sprite;
 		public shovel_on:Laya.Sprite;
-		public btn_check:Laya.Sprite;
+		public btn_buy:Laya.Button;
+		public btn_build:Laya.Button;
+		public defender_uigroup:Laya.Sprite;
+		public monster_uigroup:Laya.Sprite;
+		public text_timer:laya.display.Text;
+		public coinBg:Laya.Sprite;
+		public text_coin:laya.display.Text;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
@@ -54,6 +62,9 @@ export module ui.GameLobby {
 		public text_5V5:laya.display.Text;
 		public btn_5V5:Laya.Button;
 		public btn_back:Laya.Sprite;
+		public MatchingPanel:Laya.Sprite;
+		public btn_cancel:Laya.Button;
+		public text_time:laya.display.Text;
 		public MatchingSuccessPanel:Laya.Sprite;
 		public red_group:Laya.Sprite;
 		public icon_red_player_1:Laya.Sprite;
@@ -68,6 +79,7 @@ export module ui.GameLobby {
 		public icon_blue_player_4:Laya.Sprite;
 		public icon_blue_player_5:Laya.Sprite;
 		public btn_entergame:Laya.Button;
+		public btn_refuse:Laya.Button;
         constructor(){ super()}
         createChildren():void {
             super.createChildren();

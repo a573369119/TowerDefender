@@ -9,7 +9,7 @@ export default class ClientSender{
     constructor(){
         
     }
-    
+    //****************UserProto.proto
     /**
     * 用户登录 101103
     * @param userName 
@@ -46,36 +46,84 @@ export default class ClientSender{
         WebSocketManager.ins.sendMsg(Protocol.REQ_USER_REGISTER,buffer);
     }
 
+
+    //****************MatchProto.proto
     /**
      * 请求匹配对局 102101
      * @param userId 
     * @param matchId 
     */
-   public static reqMatch(userId:number,matchId:number):void
-   {
-       var ReqMatch:any = WebSocketManager.ins.defineProtoClass("ReqMatch");
-       var message:any = {};
-       message.userId = userId;
-       message.matchId = matchId;
-       var buffer = ReqMatch.encode(message).finish();
-       WebSocketManager.ins.sendMsg(Protocol.REQ_MATCH,buffer);
-   }
+    public static reqMatch(userId:number,matchId:number):void
+    {
+        var ReqMatch:any = WebSocketManager.ins.defineProtoClass("ReqMatch");
+        var message:any = {};
+        message.userId = userId;
+        message.matchId = matchId;
+        var buffer = ReqMatch.encode(message).finish();
+        WebSocketManager.ins.sendMsg(Protocol.REQ_MATCH,buffer);
+    }
 
-   /**
+    /**
      * 请求 对局接受 返回102202
      * @param userId 
     * @param isAccepte 
     */
-   public static reqMatchAccept(userId:number,isAccepte:number):void
-   {
-       var ReqMatchAccept:any = WebSocketManager.ins.defineProtoClass("ReqMatchAccept");
-       var message:any = {};
-       message.userId = userId;
-       message.isAccepte = isAccepte;
-       var buffer = ReqMatchAccept.encode(message).finish();
-       WebSocketManager.ins.sendMsg(Protocol.REQ_MATCH_ACCEPT,buffer);
-   }
+    public static reqMatchAccept(userId:number,isAccepte:number):void
+    {
+        var ReqMatchAccept:any = WebSocketManager.ins.defineProtoClass("ReqMatchAccept");
+        var message:any = {};
+        message.userId = userId;
+        message.isAccepte = isAccepte;
+        var buffer = ReqMatchAccept.encode(message).finish();
+        WebSocketManager.ins.sendMsg(Protocol.REQ_MATCH_ACCEPT,buffer);
+    }
     
+
+    //****************GameProto.proto
+    /**
+     * 请求资源加载完毕 返回103201
+     * @param userId 
+    * @param isAccepte 
+    */
+    public static reqOnLoad(userId:number):void
+    {
+        var ReqOnLoad:any = WebSocketManager.ins.defineProtoClass("ReqOnLoad");
+        var message:any = {};
+        message.userId = userId;
+        var buffer = ReqOnLoad.encode(message).finish();
+        WebSocketManager.ins.sendMsg(Protocol.REQ_ONLOAD,buffer);
+    }
+    
+    /**
+     * 请求资源加载完毕 返回103202
+     * @param userId 
+    * @param isAccepte 
+    */
+    public static reqMapOver(userId:number,status:number,mapChunkList:Array<number>):void
+    {
+        var ReqMapOver:any = WebSocketManager.ins.defineProtoClass("ReqMapOver");
+        var message:any = {};
+        message.userId = userId;
+        message.status = status;
+        message.mapChunkList=mapChunkList;
+        var buffer = ReqMapOver.encode(message).finish();
+        WebSocketManager.ins.sendMsg(Protocol.REQ_MAPOVER,buffer);
+    }
+
+    /**
+     * 每回合怪物投放好之后 或者时间到了请求完成 返回103103
+     * @param userId 
+    * @param isAccepte 
+    */
+    public static reqPutMonsterOver(userId:number,monsterList:Array<number>):void
+    {
+        var ReqPutMonsterOver:any = WebSocketManager.ins.defineProtoClass("ReqPutMonsterOver");
+        var message:any = {};
+        message.userId = userId;
+        message.monsterList=monsterList;
+        var buffer = ReqPutMonsterOver.encode(message).finish();
+        WebSocketManager.ins.sendMsg(Protocol.REQ_PUTMONSTEROVER,buffer);
+    }
     /***消息发送*/
 
     /**********************************webSocket */

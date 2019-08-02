@@ -34,22 +34,33 @@ P 7E990267 vscroll.png
 P E466EB1C vslider$bar.png
 P 2BFF7046 vslider.png
 D game
+P 46D1EB3A bullet.png
+P C35E4F0E buy.png
+P EC621DE2 coin.png
+P 56197359 crystal.png
+P 4F2CF757 defender1.png
+P 0185F17C defender2.png
+P 9BD9D937 defender3.png
+P B8C8AB2B defender4.png
+P 6C809280 defender5.png
 P 58F6C632 door.png
 P DAA10415 grass1.png
 P AAE3A685 grass2.png
+P 370D855D hp.png
+P 7A03FE1E hpbg.png
 P 8D5B1099 mud.png
 P 8DC1620F road.png
 P D40CB089 shovel_off.png
 P 41AF36DC shovel_on.png
-P 8AF59429 sure_0.png
+P 7E186EF3 up.png
 P FFEC09D8 wall.png
 R 3C9227DC wood.png
 D gameLobby
 P 54FBC724 back.png
 P 12F5D4EF MenuItem.png
 P 6F851E79 player_icon.png
+P C4012113 player_icon2.png
 P FA988F83 player_icon_bg.png
-D public
 D unpackage
 D welcome
 P D7518C64 light.png
@@ -57,18 +68,30 @@ R 47EE59FF loginbox.png
 R 41CCD3AD progressBg.png
 P 5DB194CD progressLight.png
 D game/ani
-P 9292D904 monster_down1.png
-P 37590528 monster_down2.png
-P 00BBA6C8 monster_down3.png
-P 15AD8FB9 monster_left1.png
-P 6E92A427 monster_left2.png
-P 10877264 monster_left3.png
-P 073F07C1 monster_right1.png
-P BD5142E7 monster_right2.png
-P C5C82E46 monster_right3.png
-P 7F3260AD monster_up1.png
-P 4857DDA9 monster_up2.png
-P FAFD9A44 monster_up3.png
+P 9292D904 monster1_down1.png
+P 37590528 monster1_down2.png
+P 00BBA6C8 monster1_down3.png
+P 15AD8FB9 monster1_left1.png
+P 6E92A427 monster1_left2.png
+P 10877264 monster1_left3.png
+P 073F07C1 monster1_right1.png
+P BD5142E7 monster1_right2.png
+P C5C82E46 monster1_right3.png
+P 7F3260AD monster1_up1.png
+P 4857DDA9 monster1_up2.png
+P FAFD9A44 monster1_up3.png
+P DE0C07B9 monster2_down1.png
+P 4CF68DC5 monster2_down2.png
+P BA622557 monster2_down3.png
+P 1D71C483 monster2_left1.png
+P DAFDAC8C monster2_left2.png
+P 25C69B8C monster2_left3.png
+P 1E44FE84 monster2_right1.png
+P 2BDDF2A3 monster2_right2.png
+P F4753D0C monster2_right3.png
+P FFA81CBF monster2_up1.png
+P 60B5AD5E monster2_up2.png
+P FFA81CBF monster2_up3.png
 D unpackage/gameLobby
 R F0C1A1F4 gameLobbyBg.png
 R 4516FF0C loadingbg.png

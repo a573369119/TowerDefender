@@ -1,0 +1,67 @@
+syntax = "proto3";
+//option java_package="com.game.user.proto";
+option java_outer_classname="GameProto";
+//option java_multiple_files = true; 
+
+//------------------------匹配消息文件协议前缀102
+
+//----------------------bean
+message mapChunk{//地图块信息
+				int32 x = 1;
+				int32 y = 2;
+}
+
+message monster{//怪物
+			  int32 unm = 1;//怪物数量
+			  int32 monsterId = 2; //怪物的配置id 通过 id 找怪物
+}
+//-------------REQ请求  
+//-------------游戏流程： //1、游戏加载完成 请求103101 返回103201 
+													//2、游戏开始垒建地图 
+													//3、地图垒建完成或者垒建地图时间到请求 103102 返回 103202
+													//4、游戏开始给对方投放怪物
+													//5、怪物投放完毕 请求 103103 返回103203
+													
+
+//----------------------103101-------------------------请求资源加载完毕  返回103201
+message ReqOnLoad{
+				fixed64 userId = 1;//
+}
+
+//----------------------103102-------------------------请求地图垒好 返回103202
+message ReqMapOver{//地图垒建完，或者时间到
+				int32 status = 1;//1代表从起点垒到了终点 2代表没有垒到终点，服务器自动生成一个路径
+				repeated mapChunk mapChunkList = 2;//传入改该玩家的地图块数组 
+				fixed64 userId = 3;//用户id
+}
+
+//----------------------103103---------------------------每回合怪物投放好之后 或者时间到了请求完成
+message ReqPutMonsterOver{
+				fixed64 userId = 1;//用户id
+				repeated monster monsterList = 2;//怪物数组 id 和数量 详情 请看bean↑
+				
+}
+
+//-------------RES返回
+
+//----------------------103201------------------------当所有人都加载好了之后返回游戏开始消息 
+message ResOnLoad{
+				int32 status = 1;//1都加载完毕游戏可以开始 
+				int32 time = 2;//垒图时间 秒
+				mapChunk team1StartPoint = 3;//队伍1起点
+				mapChunk team2StartPoint = 4;//队伍2起点
+}
+
+//-----------------------103202------------------------返回 所有的地图路径信息
+message ResAllMapInfo{
+				repeated mapChunk team1Road = 1;//队伍1的路径
+				repeated mapChunk team2Road = 2;//队伍2的路径
+				int32 status = 3;//status=1代表可以开始向对方投放怪物
+				int32 truns = 4;//回合数
+}
+//------------------------103203------------------------返回给双方，每回合的怪物
+message ResMonsterInfo{//返回 双方的怪物数组信息，并且返回一个怪物出兵的时间。
+				repeated monster monsterListTeam1 = 1;//队伍1的怪物
+				repeated monster monsterListTeam2 = 2;//队伍2的怪物
+				int32 time = 3;//离怪物出发还有多少秒
+}

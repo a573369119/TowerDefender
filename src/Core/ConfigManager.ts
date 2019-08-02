@@ -74,6 +74,15 @@ export default class ConfigManager{
             }
         }
     }
+    
+    /**
+     * 获取本配置文件含有的项数 @configNmae : Json文件名 
+     */
+    public getConfigLength(configName:string):number
+    {
+        let configObj = this[configName + "Config"];
+        return configObj.length;
+    }
 
     /**
      * 根据类型获取配置 1金2木3水4火5土
