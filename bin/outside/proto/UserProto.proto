@@ -27,5 +27,5 @@ message ReqUserRegister{
 message ResUserLogin{
 				fixed64 userId = 1;//用户唯一id
 				string userName = 2;//用户名
-				UserData userData = 3;//用户数据
+				UserData userData = 3;//用户数据,暂时未用到
 }

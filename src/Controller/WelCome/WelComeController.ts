@@ -114,9 +114,7 @@ export default class WelComeController extends ui.Welcome.LoginUI{
     /**点击登陆 */
     private onLogin() : void
     {
-        //ClientSender.reqUserLogin(this.input_userName.text,this.input_userKey.text);
-        this.ownPlayer=new Player("张三","gameLobby/player_icon.png");
-        Laya.Scene.open("GameLobby/GameLobby.scene");
+        ClientSender.reqUserLogin(this.input_userName.text,this.input_userKey.text);
     }
 
     /**点击注册 */
@@ -143,10 +141,12 @@ export default class WelComeController extends ui.Welcome.LoginUI{
         console.log(data);
         if(data !== undefined)
         {
+            this.ownPlayer=new Player(data.userName,data.userId,"gameLobby/player_icon.png");
+
             let text = "登陆成功，进入游戏！"
             if(this.sp_registerBox.visible) text = "注册成功，将直接进入游戏！";
             MessageManager.ins.showFloatMsg(text);
-            Laya.timer.once(100,this,this.toGameMain);
+            this.toGameMain();
         }
     }
 

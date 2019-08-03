@@ -5,28 +5,31 @@ import MessageManager from "../../Core/MessageManager";
 import WelComeController from "./WelComeController";
 import Grass from "../Game/Prefab/Grass";
 export default class Player{
+    /**用户Id */
+    public userId:number;
     /**阵营 */
     public camp:string;
     /**名字 */
     public name:string;
     /**头像 */
     public icon:string;
-    /**玩家方草坪 */
+    /**草坪组 */
     public fac:GrassFactory;
-    /**草坪所属组 */
+    /**草坪所属父类面板 */
     public group:Laya.Sprite;
     /**怪物出生点 */
-    public monsterBornGrass:Grass;
+    public enemy_MonsterBornGrass:Grass;
     /**当前选择放置的防御塔类型，默认选择1 */
     public defenderId:number;
     /**当前选择放置防御塔类型需要消耗的金币数 */
     public defenderCoin:number;
     /**金币 */
     public coin:number;
-    constructor(name,icon)
+    constructor(name,userId,icon)
     {
         this.name=name
         this.icon=icon;
+        this.userId=userId;
     }
 
     /*******************************己方玩家********************************************/
@@ -44,21 +47,26 @@ export default class Player{
             GameController.Instance.red_group.mouseEnabled=false;
         }
         this.group.mouseEnabled=false;
-        this.fac=new GrassFactory(this.camp,this.group);
+        this.fac=new GrassFactory(this.group);
         this.coin=500;
         GameController.Instance.text_coin.text=this.coin.toString();
-        this.addEvent();
         
     }
 
-    /**添加事件 */
-    public addEvent()
+    /**敌方玩家初始化 */
+    public enemyGameInit():void
     {
-        
-    }
-    
+        if(this.camp=="red")
+        {
+            this.group=GameController.Instance.red_group;
+        }
+        else
+        {
+            this.group=GameController.Instance.blue_group;
+        }
+        this.fac=new GrassFactory(this.group);
 
-   
+    }
 
     /**为剩下的草坪注册新事件 */
     public restGrassAddEvent():void

@@ -12,8 +12,8 @@ export default class MatchAcceptHandler extends SocketHandler{
 
      public explain(data):void
     {
-        var ResMatchAccepteInfo:any = WebSocketManager.ins.defineProtoClass("ResMatchAccepteInfo");
-        var message:any = ResMatchAccepteInfo.decode(data);
+        var ResMatchAcceptInfo:any = WebSocketManager.ins.defineProtoClass("ResMatchAcceptInfo");
+        var message:any = ResMatchAcceptInfo.decode(data);
         super.explain(message);
     }
     /**处理数据 */

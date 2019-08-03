@@ -51,7 +51,7 @@ export default class ClientSender{
     /**
      * 请求匹配对局 102101
      * @param userId 
-    * @param matchId 
+    * @param matchId 1为1V1
     */
     public static reqMatch(userId:number,matchId:number):void
     {
@@ -66,14 +66,14 @@ export default class ClientSender{
     /**
      * 请求 对局接受 返回102202
      * @param userId 
-    * @param isAccepte 
+    * @param isAccept
     */
-    public static reqMatchAccept(userId:number,isAccepte:number):void
+    public static reqMatchAccept(userId:number,isAccept:number):void
     {
         var ReqMatchAccept:any = WebSocketManager.ins.defineProtoClass("ReqMatchAccept");
         var message:any = {};
         message.userId = userId;
-        message.isAccepte = isAccepte;
+        message.isAccept = isAccept;
         var buffer = ReqMatchAccept.encode(message).finish();
         WebSocketManager.ins.sendMsg(Protocol.REQ_MATCH_ACCEPT,buffer);
     }

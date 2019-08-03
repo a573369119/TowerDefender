@@ -1,6 +1,10 @@
 import { ui } from "../../ui/layaMaxUI";
 import ConfigManager from "../../Core/ConfigManager";
 import WelComeController from "../WelCome/WelComeController";
+import WebSocketManager from "../../Core/Net/WebSocketManager";
+import { Protocol } from "../../Core/Const/GameConfig";
+import OnLoadHandler from "../Game/handler/OnLoadHandler";
+import ClientSender from "../../Core/Net/ClientSender";
 export default class LoadingController extends ui.PlayerLoadingUI{
     /**是否连接上服务器 */
     private isConnectServer : boolean;
@@ -12,35 +16,18 @@ export default class LoadingController extends ui.PlayerLoadingUI{
         this.isConnectServer = false; 
         this.selectMode();
         this.loadAssets();
-    }
-    
-    /**加载游戏场景资源 */
-    private loadAssets() : void
-    {
-        let src = [
-            //图集加载
-            {url:"res/atlas/game.atlas"}, 
-            {url:"res/atlas/game/ani.atlas"}     
-        ];
-        Laya.loader.load(src,Laya.Handler.create(this,this.onLoad),Laya.Handler.create(this,this.onProcess));
+        
     }
 
-    /**加载进程 */
-    private onProcess(pro) : void
+    /**事件绑定 */
+    private addEvents() : void
     {
-        let proBox = this.sp_progress;
-        let proW = this.sp_progressW;
-        let proL = this.sp_progressL;
-        proW.width = proBox.width*pro;
-        proL.x = proBox.width*pro;
-        if(!this.isConnectServer) this.sp_progressT.text = "进度加载 " + Math.floor(pro*100) + "%   [正在连接服务器……]";
-            else this.sp_progressT.text = "进度加载 " + Math.floor(pro*100) + "%   [服务器连接成功]";
+        WebSocketManager.ins.registerHandler(Protocol.RES_ONLOAD,new OnLoadHandler(this,this.onLoadHandler));
     }
 
-    /**加载完毕 */
-    private onLoad() : void
+    private removeEvents() : void
     {
-        this.EnterGame();
+        WebSocketManager.ins.unregisterHandler(Protocol.RES_ONLOAD,this);
     }
 
     /**确定游戏模式，显示玩家信息，界面上方显示红方玩家，下方显示蓝方玩家*/
@@ -72,6 +59,58 @@ export default class LoadingController extends ui.PlayerLoadingUI{
             this.name_red_player_3.text=WelComeController.ins.enemyPlayer.name;
         }
     }
+    
+    /**加载游戏场景资源 */
+    private loadAssets() : void
+    {
+        let src = [
+            //图集加载
+            {url:"res/atlas/game.atlas"}, 
+            {url:"res/atlas/game/ani.atlas"}     
+        ];
+        Laya.loader.load(src,Laya.Handler.create(this,this.onLoad),Laya.Handler.create(this,this.onProcess));
+    }
+
+    /**加载进程 */
+    private onProcess(pro) : void
+    {
+        let proBox = this.sp_progress;
+        let proW = this.sp_progressW;
+        let proL = this.sp_progressL;
+        proW.width = proBox.width*pro;
+        proL.x = proBox.width*pro;
+        this.sp_progressT.text = "进度加载 " + Math.floor(pro*100) + "%   [正在连接服务器……]";
+    }
+
+    /**加载完毕 */
+    private onLoad() : void
+    {
+        ClientSender.reqOnLoad(WelComeController.ins.ownPlayer.userId);
+    }
+
+    private onLoadHandler(data) : void
+    {
+        //都加载完毕游戏可以开始 
+        if(data.status==1)
+        {
+            if(WelComeController.ins.ownPlayer.camp=="red")
+            {
+                WelComeController.ins.ownPlayer.enemy_MonsterBornGrass=
+                WelComeController.ins.ownPlayer.fac.grassArray[data.team1StartPoint.x+data.team1Start.y*10];
+                WelComeController.ins.enemyPlayer.enemy_MonsterBornGrass=
+                WelComeController.ins.enemyPlayer.fac.grassArray[data.team2StartPoint.x+data.team2Start.y*10];
+            }
+            else
+            {
+                WelComeController.ins.enemyPlayer.enemy_MonsterBornGrass=
+                WelComeController.ins.enemyPlayer.fac.grassArray[data.team1StartPoint.x+data.team1Start.y*10];
+                WelComeController.ins.ownPlayer.enemy_MonsterBornGrass=
+                WelComeController.ins.ownPlayer.fac.grassArray[data.team2StartPoint.x+data.team2Start.y*10];
+            }
+            this.EnterGame();
+        }
+    }
+
     /**进入游戏 */
     private EnterGame() : void
     {

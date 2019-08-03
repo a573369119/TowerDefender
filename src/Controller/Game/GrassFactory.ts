@@ -5,15 +5,15 @@ export default class GrassFactory {
     public grassArray:Array<Grass>;
     /**土坑数组 */
     public mudArray:Array<Grass>;
-    constructor(camp:string,view:Laya.Sprite)
+    constructor(view:Laya.Sprite)
     {
         this.grassArray = new Array<Grass>();
         this.mudArray=new Array<Grass>();
-        this.createGrassArray(camp,view);
+        this.createGrassArray(view);
     }
     
     /**生成草坪 */
-    private createGrassArray(camp:string,view:Laya.Sprite):void
+    private createGrassArray(view:Laya.Sprite):void
     {
         for(let i=0;i<7;i++)
         {

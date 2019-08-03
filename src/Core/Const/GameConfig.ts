@@ -7,7 +7,7 @@ export class GameConfig{
     /**端口 */
     // public static PORT : number = 7777  ;
     // /**ip - 本地测试*/
-    public static IP : string = "127.0.0.1";
+    public static IP : string = "47.107.169.244";
     // /**端口 - 本地测试*/
     public static PORT : number = 7777;
 
@@ -52,8 +52,8 @@ export class Protocol{
 
     /**响应 返回匹配信息 只发送一次msgId = 102201 */
     public static RES_MATCH_INFO : number = 102201;
-    /**响应 返回对局接受消息msgId = 10202 */
-    public static RES_MATCH_ACCEPT_INFO : number = 10202;
+    /**响应 返回对局接受消息msgId = 102202 */
+    public static RES_MATCH_ACCEPT_INFO : number = 102202;
 
 
     //****************GameProto.proto

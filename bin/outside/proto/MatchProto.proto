@@ -12,6 +12,7 @@ message matchInfo{//匹配信息
 				string userNickName = 3;//用户昵称
 				string userName = 4;//用户名
 				int32 type = 5;//1右方 2敌方
+				int32 teamNum = 6;//1 代表队伍1左边  2代表队伍2右边
 }
 
 //-------------REQ请求
@@ -25,7 +26,7 @@ message ReqMatch{
 //----------------------102102-------------------------请求 对局接受  返回102202
 message ReqMatchAccept{
 				fixed64 userId = 1;//用户唯一Id
-				int32 isAccepte = 2;//0代表(服务器用) 无状态 1代表 接受 2代表 拒绝 3代表确认（服务器用）
+				int32 isAccept = 2;//0代表(服务器用) 无状态 1代表 接受 2代表 拒绝 3代表确认（服务器用）
 }
 
 //-------------RES返回
@@ -36,8 +37,8 @@ message ResMatchInfo{
 				repeated matchInfo matchInfoList = 2;//匹配玩家信息 repeated代表数组
 }
 
-//-----------------------10202------------------------返回对局接受消息
-message ResMatchAccepteInfo{
+//-----------------------102202------------------------返回对局接受消息
+message ResMatchAcceptInfo{
 				repeated fixed64 userIdList = 1;//还需等待那些用户接受的id列表，若userIdList没用用户id则，全部接受，进入游戏界面
 				int32 status = 2;// 1匹配继续  2对局结束-等待结束（有人拒绝）
 }

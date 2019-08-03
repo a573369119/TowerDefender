@@ -3,18 +3,22 @@ import WebSocketManager from "../../Core/Net/WebSocketManager";
 import { Protocol, GameConfig } from "../../Core/Const/GameConfig";
 import MatchHandler from "../GameLobby/handler/MatchHandler";
 import ClientSender from "../../Core/Net/ClientSender";
-import MessageManager from "../../Core/MessageManager";
 import WelComeController from "../WelCome/WelComeController";
 import Player from "../WelCome/Player";
-import ConfigManager from "../../Core/ConfigManager";
-import MonsterConfig from "../../Data/Config/MosnterConfigr";
+import MatchAcceptHandler from "./handler/MatchAcceptHandler";
 export default class GameLobbyController extends ui.GameLobby.GameLobbyUI{
+    /**分计数 */
+    private minute:number;
+    /**秒计数 */
+    private second:number;
     constructor(){
         super();
     }
 
     /**启动 */
     onEnable(){
+        this.second=0;
+        this.minute=0;
         this.addEvents();
     }
 
@@ -33,12 +37,14 @@ export default class GameLobbyController extends ui.GameLobby.GameLobbyUI{
         this.btn_cancel.on(Laya.Event.CLICK,this,this.onCancel);
         this.btn_entergame.on(Laya.Event.CLICK,this,this.onSure);
         WebSocketManager.ins.registerHandler(Protocol.RES_MATCH_INFO,new MatchHandler(this,this.onMatchHandler));
+        WebSocketManager.ins.registerHandler(Protocol.RES_MATCH_ACCEPT_INFO,new MatchAcceptHandler(this,this.onMatchAcceptHandler));
     }
 
     private removeEvents() : void
     {
         this.btn_PVP.off(Laya.Event.CLICK,this,this.onPVPMode);
         WebSocketManager.ins.unregisterHandler(Protocol.RES_MATCH_INFO,this);
+        WebSocketManager.ins.unregisterHandler(Protocol.RES_MATCH_ACCEPT_INFO,this);
     }
 
 
@@ -49,34 +55,31 @@ export default class GameLobbyController extends ui.GameLobby.GameLobbyUI{
         this.ModeChoosePanel.visible=true;
     }
 
-    /**获取到消息 */
-    private onMatchHandler(data) : void
+    /**点击返回游戏大厅 */
+    private onBack() : void
     {
-        console.log(data+"匹配成功");
-        if(data !== undefined)
-        {
-            Laya.timer.frameOnce(100,this,this.chooseMatch);
-        }
+        this.MenuItemPanel.visible = true;
+        this.ModeChoosePanel.visible=false;
     }
 
     /**点击选择1V1模式，匹配界面只显示玩家和敌人两个头像 */
     private on1V1() : void
     {
-       this.ModeChoosePanel.visible=false;
-       this.MatchingPanel.visible=true;
-       //ClientSender.reqMatch(1,1);
-       for(let i=0;i<5;i++)
-       {
-           this.red_group._children[i].visible=false;
-           this.blue_group._children[i].visible=false;
-       }
-       this.icon_red_player_3.visible=true;
-       this.icon_blue_player_3.visible=true;
-       WelComeController.ins.mode="1V1";
+        //发送匹配请求
+        ClientSender.reqMatch(WelComeController.ins.ownPlayer.userId,1);
+        Laya.timer.frameLoop(60,this,this.calTime);
 
-       //暂时使用，联网后删去
-       Laya.timer.frameOnce(60*2,this,this.chooseMatch);
-       //Laya.timer.frameLoop(60,this,this.calTime);
+        this.ModeChoosePanel.visible=false;
+        this.MatchingPanel.visible=true;
+        for(let i=0;i<5;i++)
+        {
+            this.red_group._children[i].visible=false;
+            this.blue_group._children[i].visible=false;
+        }
+        this.icon_red_player_3.visible=true;
+        this.icon_blue_player_3.visible=true;
+        WelComeController.ins.mode="1V1";
+
     }
 
     /**点击选择5V5模式 */
@@ -85,24 +88,73 @@ export default class GameLobbyController extends ui.GameLobby.GameLobbyUI{
         //WelComeController.ins.mode="5V5";
     }
 
-    /**点击返回游戏大厅 */
-    private onBack() : void
+    /**Match获取到消息 */
+    private onMatchHandler(data) : void
     {
-        this.MenuItemPanel.visible = true;
-        this.ModeChoosePanel.visible=false;
+        console.log(data+"匹配成功");
+        if(data.status==1 )
+        {
+            this.chooseMatch();
+            WelComeController.ins.enemyPlayer=new Player(data.matchInfoList[0].userName,data.matchInfoList[0].userId,"gameLobby/player_icon2.png");
+            if(data.matchInfoList[0].teamNum==1)
+            {
+                WelComeController.ins.enemyPlayer.camp="red";
+                WelComeController.ins.ownPlayer.camp="blue";
+                this.icon_red_player_3.loadImage(WelComeController.ins.enemyPlayer.icon);
+                this.icon_blue_player_3.loadImage(WelComeController.ins.ownPlayer.icon);
+            }
+            else
+            {
+                WelComeController.ins.enemyPlayer.camp="blue";
+                WelComeController.ins.ownPlayer.camp="red";
+                this.icon_red_player_3.loadImage(WelComeController.ins.ownPlayer.icon);
+                this.icon_blue_player_3.loadImage(WelComeController.ins.enemyPlayer.icon);
+            }
+        }
     }
+
+   
 
     /**计时，在等待队列等待了多长时间 */
     private calTime():void
     {
-        //this.text_time.text=""
+        let secondStr,minuteStr;
+        this.second++;
+        if(this.second<=9)
+        {
+            secondStr="0"+this.second;
+        }
+        else if(this.second>=60)
+        {
+            this.minute++;
+            this.second=0;
+            secondStr="0"+this.second;
+        }
+        else
+        {
+            secondStr=this.second.toString();
+        }
+
+        if(this.minute<=9)
+        {
+            minuteStr="0"+this.minute;
+        }
+        else
+        {
+            minuteStr=this.minute.toString();
+        }
+        this.text_time.text=minuteStr+":"+secondStr;
     }
 
-    /**匹配过程中点击取消,返回模式选择界面，从等待房间退出 */       //--网络
+    /**匹配过程中点击取消,返回模式选择界面，从等待房间退出 */       
     private onCancel():void
     {
         this.MatchingPanel.visible=false;
         this.ModeChoosePanel.visible=true;
+        Laya.timer.clear(this,this.calTime);
+        this.minute=0;
+        this.second=0;
+        ClientSender.reqMatchAccept(WelComeController.ins.ownPlayer.userId,2);//拒绝
     }
 
     /**匹配成功弹框，获取敌方玩家信息，选择是否进入游戏 */
@@ -110,32 +162,17 @@ export default class GameLobbyController extends ui.GameLobby.GameLobbyUI{
     {
         this.MatchingPanel.visible=false;
         this.MatchingSuccessPanel.visible=true;
-        //暂时取一个给定的敌方玩家信息                              //--暂时
-        WelComeController.ins.enemyPlayer=new Player("李四","gameLobby/player_icon2.png");
-        //随机选择一个阵营
-        //let random=Math.ceil(Math.random()*2);
-        let random=0;
-        if(random==0)
-        {
-            WelComeController.ins.ownPlayer.camp="red";
-            WelComeController.ins.enemyPlayer.camp="blue";
-            this.icon_red_player_3.loadImage(WelComeController.ins.ownPlayer.icon);
-            this.icon_blue_player_3.loadImage(WelComeController.ins.enemyPlayer.icon);
-        }
-        else
-        {
-            WelComeController.ins.ownPlayer.camp="blue";
-            WelComeController.ins.enemyPlayer.camp="red";
-            this.icon_blue_player_3.loadImage(WelComeController.ins.ownPlayer.icon);
-            this.icon_red_player_3.loadImage(WelComeController.ins.enemyPlayer.icon);
-        }
+        Laya.timer.clear(this,this.calTime);
+        this.minute=0;
+        this.second=0;
+        
     }
 
     /**点击确定，等待房间内人都确定后跳转进入游戏场景 */            //--网络
     private onSure():void
     {
         /**我方玩家点击确定发送请求，等待敌方玩家确定 */
-        //todo
+        //ClientSender.reqMatchAccept(WelComeController.ins.ownPlayer.userId,1);//接受
         Laya.Scene.open("PlayerLoading.scene");
     }
 
@@ -143,10 +180,28 @@ export default class GameLobbyController extends ui.GameLobby.GameLobbyUI{
     private onRefuse():void
     {
         //其中一个人发送拒绝请求，直接解散房间
-        //todo
         this.ModeChoosePanel.visible=true;
         this.MatchingSuccessPanel.visible=false;
+        ClientSender.reqMatchAccept(WelComeController.ins.ownPlayer.userId,2);//拒绝
     }
 
-     
+      /**MatchAccept获取到消息 */
+    private onMatchAcceptHandler(data) : void
+    {
+        console.log(data+"这个");
+        if(data.status==2)
+        {
+            //其中一个人发送拒绝请求，直接解散房间
+            this.ModeChoosePanel.visible=true;
+            this.MatchingSuccessPanel.visible=false;
+        }
+        else
+        {
+            console.log(data.userIdList.length+"咋回事啊");
+            if(data.userIdList.length==0)
+            {
+                Laya.Scene.open("PlayerLoading.scene");
+            }
+        }
+    }
 }

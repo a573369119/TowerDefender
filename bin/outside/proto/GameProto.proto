@@ -12,7 +12,7 @@ message mapChunk{//地图块信息
 }
 
 message monster{//怪物
-			  int32 unm = 1;//怪物数量
+			  int32 num = 1;//怪物数量
 			  int32 monsterId = 2; //怪物的配置id 通过 id 找怪物
 }
 //-------------REQ请求  
@@ -58,10 +58,12 @@ message ResAllMapInfo{
 				repeated mapChunk team2Road = 2;//队伍2的路径
 				int32 status = 3;//status=1代表可以开始向对方投放怪物
 				int32 truns = 4;//回合数
+				int32 time = 5;//选择怪物时间（增加）
 }
 //------------------------103203------------------------返回给双方，每回合的怪物
 message ResMonsterInfo{//返回 双方的怪物数组信息，并且返回一个怪物出兵的时间。
 				repeated monster monsterListTeam1 = 1;//队伍1的怪物
 				repeated monster monsterListTeam2 = 2;//队伍2的怪物
 				int32 time = 3;//离怪物出发还有多少秒
+				int32 status = 4;// status=1双方都选好了怪物（增加）
 }

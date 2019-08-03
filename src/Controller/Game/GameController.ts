@@ -132,7 +132,7 @@ export default class GameController extends ui.Game.GameUI{
         WelComeController.ins.ownPlayer.defenderId=1;
         WelComeController.ins.ownPlayer.defenderCoin=this.defenderItemUIArray[0].data.price;
         this.addEvents();
-        this.getEnemyMonsterPosNum();
+        this.players_SetMonsterBornPos();
     }
 
     /**事件绑定 */
@@ -154,27 +154,14 @@ export default class GameController extends ui.Game.GameUI{
         WelComeController.ins.ownPlayer.group.mouseEnabled=this.isUseShovel; 
     }
 
-    /**先由系统随机取0-70的数（每个玩家拥有70块草坪），发送请求给对方，在对方土地占领该土地 */
-    private setRandomMonsterOccupy():void
+    /**设置怪兽出生点 */
+    private players_SetMonsterBornPos():void
     {
-        let random=Math.ceil(Math.random()*70);                 //--网络
-        //发送给敌方玩家这个位置标号
-        //client.send(random);
-        //发送后接收回调函数
-        this.getEnemyMonsterPosNum();
-        
-    }
-
-    /**获取敌方玩家的怪兽在我方草坪占的位置 */
-    private getEnemyMonsterPosNum():void
-    {
-        //获得信息
-        //let random=client.get(data)                           //--网络
-        let random1=0,random2=1;
-        WelComeController.ins.ownPlayer.monsterBornGrass=WelComeController.ins.ownPlayer.fac.grassArray[random1+random2*10];
-        //随机取一个10号位草坪变为土块作为怪兽出生点
-        WelComeController.ins.ownPlayer.monsterBornGrass.changeImg();
-        WelComeController.ins.ownPlayer.monsterBornGrass.sp.off(Laya.Event.CLICK,WelComeController.ins.ownPlayer.monsterBornGrass,WelComeController.ins.ownPlayer.monsterBornGrass.Event1_changeState);
+        //获取敌方玩家的怪兽在我方草坪占的位置，变成土块
+        WelComeController.ins.ownPlayer.enemy_MonsterBornGrass.changeImg();
+        WelComeController.ins.ownPlayer.enemy_MonsterBornGrass.sp.off(Laya.Event.CLICK,WelComeController.ins.ownPlayer.enemy_MonsterBornGrass,WelComeController.ins.ownPlayer.enemy_MonsterBornGrass.Event1_changeState);
+        WelComeController.ins.ownPlayer.enemy_MonsterBornGrass.changeImg();
+        WelComeController.ins.ownPlayer.enemy_MonsterBornGrass.sp.off(Laya.Event.CLICK,WelComeController.ins.ownPlayer.enemy_MonsterBornGrass,WelComeController.ins.ownPlayer.enemy_MonsterBornGrass.Event1_changeState);
     }
 
     /**检查是否建好好路径 */
@@ -245,7 +232,7 @@ export default class GameController extends ui.Game.GameUI{
         for(let i=0;i<monsterSignArray.length;i++)
         {
             let monster:Monster=Laya.Pool.getItemByClass("monster",Monster);
-            monster.init(player.group,player.monsterBornGrass.sp.x,player.monsterBornGrass.sp.y,monsterSignArray[i]);
+            monster.init(player.group,player.enemy_MonsterBornGrass.sp.x,player.enemy_MonsterBornGrass.sp.y,monsterSignArray[i]);
             monster.ani.visible=false;
             this.monsterArray.push(monster);
         }
